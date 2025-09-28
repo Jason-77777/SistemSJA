@@ -1,0 +1,151 @@
+/* File: src/pages/MySchedule.css */
+
+.page-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 24px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.page-header {
+  margin-bottom: 32px;
+  text-align: center;
+  color: #2c3e50; /* Warna judul lebih gelap */
+}
+
+.page-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* --- Kartu Pendaftaran Utama --- */
+.schedule-card {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef; /* Border lebih soft */
+  border-radius: 12px;
+  margin-bottom: 32px; /* Jarak antar kartu lebih besar */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06); /* Shadow lebih halus */
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 16px 24px;
+  background-color: #2c3e50; /* Header biru gelap konsisten */
+  color: white;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.card-body {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+}
+
+.detail-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #343a40; /* Teks konten lebih gelap agar mudah dibaca */
+}
+
+.detail-item strong {
+  color: #6c757d;
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px; /* Ukuran font label dikecilkan */
+  text-transform: uppercase; /* Label menjadi huruf besar */
+}
+
+/* --- Status Pembayaran --- */
+.status-banner {
+  grid-column: 1 / -1;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 600; /* Dibuat lebih tebal */
+  margin-top: 16px;
+  border: 1px solid; /* Tambahkan border tipis */
+}
+
+/* Warna-warna status yang lebih soft */
+.status-lunas { background-color: #d1e7dd; color: #0f5132; border-color: #badbcc; }
+.status-verifikasi { background-color: #fff3cd; color: #664d03; border-color: #ffecb5; }
+.status-ditolak { background-color: #f8d7da; color: #842029; border-color: #f5c2c7; }
+.status-belum-bayar { background-color: #e2e3e5; color: #41464b; border-color: #d3d6d8; }
+
+/* --- Tombol Aksi & Notifikasi --- */
+.action-area {
+  grid-column: 1 / -1;
+  margin-top: 16px;
+  padding-top: 24px;
+  border-top: 1px solid #e9ecef;
+}
+
+.action-button {
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.button-bayar { background-color: #007bff; color: white; }
+.button-daftar-baru { background-color: #28a745; color: white; }
+.button-upload-ulang { background-color: #ffc107; color: #212529; }
+
+/* --- Tabel Sesi Belajar --- */
+.session-table-wrapper {
+  grid-column: 1 / -1;
+  margin-top: 16px;
+}
+.session-table-wrapper > p {
+    font-size: 14px;
+    color: #6c757d;
+    line-height: 1.5;
+}
+.session-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.session-table th, .session-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+}
+.session-table thead {
+  background-color: #f8f9fa;
+  font-size: 14px;
+  color: #6c757d;
+}
+.session-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.session-table td.session-number {
+  text-align: center;
+  font-weight: 700;
+  color: #007bff;
+}
+
+/* --- Aturan untuk Mobile --- */
+@media (max-width: 600px) {
+  .card-body {
+    grid-template-columns: 1fr;
+  }
+  .page-container {
+    padding: 16px;
+  }
+}

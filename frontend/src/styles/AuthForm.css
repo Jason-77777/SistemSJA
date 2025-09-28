@@ -1,0 +1,171 @@
+/* File: src/styles/AuthForm.css */
+
+/* --- Container Utama --- */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #ffffff; /* Background putih */
+  font-family: 'Montserrat', sans-serif; /* Font Montserrat */
+  color: #1a1a1a; /* Warna teks hitam */
+}
+
+/* ... kode .auth-header Anda ... */
+
+/* --- TAMBAHKAN CLASS INI --- */
+.auth-logo {
+  width: 80px;  /* Atur lebar logo */
+  height: 80px; /* Atur tinggi logo */
+  border-radius: 50%; /* Membuatnya bulat */
+  object-fit: cover; /* Memastikan gambar tidak gepeng */
+  margin-bottom: 20px; /* Jarak ke tulisan "Selamat Datang" */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sedikit bayangan */
+}
+
+
+.auth-form-wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  background-color: #f9f9f9; /* Sedikit abu-abu agar form menonjol */
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Header Form --- */
+.auth-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.auth-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.auth-header p {
+  font-size: 14px;
+  color: #666;
+}
+
+.auth-header a {
+  color: #007bff; /* Biru */
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.auth-header a:hover {
+  text-decoration: underline;
+}
+
+
+/* --- Input Fields --- */
+.input-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.input-field, .auth-select-field {
+  box-sizing: border-box; /* PERBAIKAN: Agar padding tidak merusak lebar */
+  width: 100%;
+  padding: 12px 12px 12px 40px; /* Padding untuk ikon */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  transition: border-color 0.3s;
+}
+
+.auth-select-field {
+  padding: 12px; /* Padding normal untuk select field */
+}
+
+.input-field:focus, .auth-select-field:focus {
+  outline: none;
+  border-color: #007bff; /* Biru saat aktif */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+
+/* --- Tombol & Link --- */
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff; /* Tombol Biru */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.auth-button:hover {
+  background-color: #0056b3; /* Biru lebih gelap saat hover */
+}
+
+.auth-button:active {
+  transform: scale(0.98);
+}
+
+.auth-select-field {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 1em;
+}
+
+/* --- State Notifikasi --- */
+.notification {
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+}
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* --- Media Query untuk Tampilan Mobile --- */
+@media (max-width: 480px) {
+  .auth-form-wrapper {
+    padding: 25px; 
+    box-shadow: none;
+    border: none; 
+    background-color: #ffffff;
+  }
+
+  .auth-header h1 {
+    font-size: 24px; 
+  }
+
+  .auth-container {
+    align-items: flex-start;
+    padding-top: 40px;
+  }
+}

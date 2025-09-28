@@ -1,0 +1,137 @@
+/* File: src/pages/HomePage.css */
+
+/* --- 1. Hero Section --- */
+.hero-section {
+  height: 90vh; /* Tinggi hampir sepenuh layar */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Lapisan gelap semi-transparan di atas gambar */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.hero-content {
+  position: relative; /* Agar muncul di atas lapisan gelap */
+  z-index: 2;
+  max-width: 700px;
+  padding: 20px;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+
+.hero-cta-button {
+  background-color: #007bff;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.hero-cta-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+
+/* --- 2. Features Section --- */
+.features-section {
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.features-section h2 {
+  font-size: 32px;
+  margin-bottom: 48px;
+  color: #2c3e50;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  text-align: center;
+}
+
+.feature-image-container {
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.feature-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%); /* Efek hitam-putih */
+  transition: filter 0.3s, transform 0.3s;
+}
+
+.feature-card:hover .feature-image {
+  filter: grayscale(0%); /* Warna kembali normal saat di-hover */
+  transform: scale(1.05);
+}
+
+.feature-card h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #343a40;
+}
+
+.feature-card p {
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+
+/* --- 3. Final CTA Section --- */
+.final-cta-section {
+  background-color: #e6f7ff;
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.final-cta-section h2 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 16px;
+}
+
+.final-cta-section p {
+  font-size: 16px;
+  color: #6c757d;
+  margin-bottom: 24px;
+}

@@ -1,0 +1,141 @@
+/* File: ManageInstructors.css */
+
+/* --- Tampilan Dasar Halaman --- */
+.page-container {
+  padding: 24px;
+  font-family: sans-serif;
+  background-color: #f8f9fa; /* Latar belakang abu-abu muda */
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #343a40;
+}
+
+/* --- Tombol-tombol --- */
+.button {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.button-primary { background-color: #007bff; color: white; }
+.button-edit { background-color: #ffc107; color: #212529; }
+.button-delete { background-color: #dc3545; color: white; }
+.button-secondary { background-color: #6c757d; color: white; }
+.button:active { transform: scale(0.98); }
+
+/* --- Tabel Instruktur --- */
+.table-wrapper {
+  /* overflow-x: auto; DIHAPUS agar tidak ada scroll */
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.styled-table th, .styled-table td {
+  padding: 16px; /* Padding lebih besar */
+  border-bottom: 1px solid #dee2e6;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.styled-table thead th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+}
+
+.styled-table tbody tr:last-of-type td {
+  border-bottom: none;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.action-cell {
+  display: flex;
+  gap: 8px;
+}
+
+/* --- Modal (Pop-up) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 32px; /* Padding lebih besar */
+  border-radius: 12px; /* Sudut lebih tumpul */
+  width: 90%;
+  max-width: 550px; /* Sedikit lebih lebar */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  text-align: center;
+  color: #343a40;
+}
+
+.modal-content form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group-full {
+  grid-column: 1 / -1;
+}
+
+.modal-content input, .modal-content select {
+  width: 100%;
+  padding: 12px; /* Padding input lebih besar */
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.modal-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}

@@ -1,0 +1,119 @@
+/* File: src/pages/RegistrationForm.css */
+
+.page-container {
+  max-width: 600px;
+  margin: 40px auto; /* Memberi jarak atas/bawah dan otomatis di tengah */
+  padding: 24px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* --- Header Pendaftaran --- */
+.registration-header {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.registration-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.schedule-selection {
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid #e0e0e0;
+}
+
+.schedule-selection h2 {
+  font-size: 20px;
+  margin: 0;
+  color: #007bff;
+}
+
+.schedule-selection p {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* --- Form Pilihan Paket --- */
+.package-selection-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-step {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.form-step label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.form-step select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: white;
+}
+
+/* --- Ringkasan & Submit --- */
+.summary-card {
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px solid #007bff; /* Border biru untuk menonjol */
+  border-radius: 8px;
+  background-color: #e6f7ff; /* Latar biru muda */
+}
+
+.summary-card h3 {
+  margin-top: 0;
+  font-size: 20px;
+  border-bottom: 1px solid #bce0fd;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.summary-card p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 16px;
+  background-color: #28a745; /* Tombol hijau untuk submit */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #218838;
+}
+
+.submit-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
