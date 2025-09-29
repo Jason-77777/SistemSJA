@@ -113,6 +113,29 @@ const ManageSchedules = () => {
       setLoading(false);
     }
   };
+  
+  // =================================================================
+  // --- KODE BARU DITAMBAHKAN DI SINI ---
+  const handleDelete = async (scheduleId) => {
+    if (!window.confirm('Apakah Anda yakin ingin menghapus jadwal ini secara permanen?')) {
+      return;
+    }
+    setLoading(true);
+    try {
+      const token = localStorage.getItem('token');
+      await axios.delete(`http://localhost:3000/api/jadwal/${scheduleId}`, {
+        headers: { 'x-auth-token': token }
+      });
+      alert('Jadwal berhasil dihapus!');
+      await fetchAllSchedules(); // Muat ulang data
+    } catch (err) {
+      alert(err.response?.data?.message || 'Gagal menghapus jadwal.');
+    } finally {
+      setLoading(false);
+    }
+  };
+  // --- AKHIR DARI KODE BARU ---
+  // =================================================================
 
   const handleGeneratorChange = (e) => {
     setGeneratorForm({ ...generatorForm, [e.target.name]: e.target.value });
@@ -256,7 +279,7 @@ const ManageSchedules = () => {
       </div>
 
       <button className="primary-button" onClick={() => setShowGenerator(!showGenerator)} style={{ marginBottom: '24px' }}>
-        {showGenerator ? 'Tutup Generator' : 'Buka Generator Jadwal Massal'}
+        {showGenerator ? 'Tutup Form' : 'Tambah Jadwal Baru'}
       </button>
 
       {showGenerator && (
@@ -300,8 +323,7 @@ const ManageSchedules = () => {
         </button>
         {laporanError && <p style={{ color: 'red', marginTop: '10px' }}>{laporanError}</p>}
       </div>
-
-      {/* ======================= PERUBAHAN DI SINI ======================= */}
+      
       <div className="page-section">
         <div className="admin-calendar-container">
           <Calendar
@@ -311,7 +333,6 @@ const ManageSchedules = () => {
           />
         </div>
       </div>
-      {/* ================================================================= */}
 
       {Object.keys(groupedSchedules).length > 0 && (
         <div className="page-section schedule-table-wrapper">
@@ -347,21 +368,40 @@ const ManageSchedules = () => {
                         {schedule.status}
                       </span>
                     </td>
+                    {/* ================================================================= */}
+                    {/* --- BAGIAN INI DIMODIFIKASI --- */}
                     <td>
                       {schedule.status === 'Penuh' || schedule.status === 'Pending' ? (
                         <button onClick={() => handleKelolaClick(schedule)}>Kelola</button>
                       ) : (
-                        <select
-                          defaultValue={schedule.status}
-                          onChange={(e) => handleStatusChange(schedule._id, e.target.value)}
-                          style={{ padding: '5px', cursor: 'pointer' }}
-                        >
-                          <option value="Tersedia">Tersedia</option>
-                          <option value="Pending">Pending</option>
-                          <option value="Penuh">Penuh</option>
-                        </select>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <select
+                            defaultValue={schedule.status}
+                            onChange={(e) => handleStatusChange(schedule._id, e.target.value)}
+                            style={{ padding: '5px', cursor: 'pointer' }}
+                          >
+                            <option value="Tersedia">Tersedia</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Penuh">Penuh</option>
+                          </select>
+                          <button
+                            onClick={() => handleDelete(schedule._id)}
+                            style={{
+                              backgroundColor: '#dc3545',
+                              color: 'white',
+                              border: 'none',
+                              borderRadius: '4px',
+                              padding: '5px 10px',
+                              cursor: 'pointer'
+                            }}
+                          >
+                            Hapus
+                          </button>
+                        </div>
                       )}
                     </td>
+                    {/* --- AKHIR DARI MODIFIKASI --- */}
+                    {/* ================================================================= */}
                   </tr>
                 ))
               ))}

@@ -130,8 +130,8 @@ const ManagePackages = () => {
               <select name="paketKursus" value={currentPackage.paketKursus} onChange={handleFormChange}>
                 <option value="Reguler">Reguler</option>
                 <option value="Complete">Complete</option>
-                <option value="Duo Reguler">Duo Reguler</option>
-                <option value="Duo Complete">Duo Complete</option>
+                {/* <option value="Duo Reguler">Duo Reguler</option>
+                <option value="Duo Complete">Duo Complete</option> */}
               </select>
               <select name="jenisKendaraan" value={currentPackage.jenisKendaraan} onChange={handleFormChange}>
                 <option value="Manual">Manual</option>
@@ -139,11 +139,11 @@ const ManagePackages = () => {
               </select>
               <select name="jenisHari" value={currentPackage.jenisHari} onChange={handleFormChange}>
                 <option value="Senin-Sabtu">Senin-Sabtu</option>
-                <option value="Libur Umum">Libur Umum</option>
+                {/* <option value="Libur Umum">Libur Umum</option> */}
               </select>
               <select name="jumlahSiswaBelajar" value={currentPackage.jumlahSiswaBelajar} onChange={handleFormChange}>
                 <option value="1 Siswa">1 Siswa</option>
-                <option value="2 Siswa">2 Siswa</option>
+                {/* <option value="2 Siswa">2 Siswa</option> */}
               </select>
               <input type="text" name="durasiKursus" value={currentPackage.durasiKursus} onChange={handleFormChange} placeholder="Durasi (cth: 18 Jam (9 Hari))" required />
               <input type="number" name="harga" value={currentPackage.harga} onChange={handleFormChange} placeholder="Harga (cth: 2800000)" required />
