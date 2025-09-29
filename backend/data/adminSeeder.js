@@ -6,18 +6,33 @@ require('dotenv').config();
 
 const Customer = require('../models/Customer'); // Sesuaikan path jika perlu
 
-// Data Admin yang akan dibuat
-const adminData = {
-  username: 'admin',
-  email: 'admin@sja.com',
-  password: 'adminpassword', // Ganti dengan password yang aman
-  namaLengkap: 'Nissa',
-  usia: 30,
-  jenisKelamin: 'Wanita',
-  noTelepon: '0895383093463',
-  alamat: 'Kantor Pusat',
-  role: 'admin',
-};
+// --- KITA BUAT SEBUAH ARRAY UNTUK MENAMPUNG SEMUA AKUN ---
+const usersToSeed = [
+  {
+    username: 'admin',
+    email: 'admin@sja.com',
+    password: 'adminpassword', // Ganti dengan password yang aman
+    namaLengkap: 'Nissa',
+    usia: 30,
+    jenisKelamin: 'Wanita',
+    noTelepon: '0895383093463',
+    alamat: 'Kantor Pusat',
+    role: 'admin',
+  },
+  // --- TAMBAHKAN DATA DIREKTUR DI SINI ---
+  {
+    username: 'direktur',
+    email: 'direktur@sja.com',
+    password: 'direkturpassword', // Ganti dengan password yang aman
+    namaLengkap: 'Jason',
+    usia: 35,
+    jenisKelamin: 'Pria',
+    noTelepon: '081234567890',
+    alamat: 'Kantor Pusat',
+    role: 'direktur',
+  }
+];
+// ------------------------------------------
 
 const importData = async () => {
   try {
@@ -25,21 +40,23 @@ const importData = async () => {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('Terkoneksi ke MongoDB untuk seeding...');
 
-    // 2. Cek apakah admin sudah ada
-    const adminExists = await Customer.findOne({ email: adminData.email });
+    // --- LOGIKA BARU MENGGUNAKAN LOOPING ---
+    for (const userData of usersToSeed) {
+      // 2. Cek apakah user (admin/direktur) sudah ada
+      const userExists = await Customer.findOne({ email: userData.email });
 
-    if (adminExists) {
-      console.log('Akun admin sudah ada di database.');
-    } else {
-      // 3. Jika belum ada, buat admin baru
-      
-      // Enkripsi password sebelum disimpan
-      const salt = await bcrypt.genSalt(10);
-      adminData.password = await bcrypt.hash(adminData.password, salt);
-      
-      await Customer.create(adminData);
-      console.log('✅ Akun admin berhasil dibuat!');
+      if (userExists) {
+        console.log(`Akun untuk ${userData.email} sudah ada.`);
+      } else {
+        // 3. Jika belum ada, buat user baru
+        const salt = await bcrypt.genSalt(10);
+        userData.password = await bcrypt.hash(userData.password, salt);
+        
+        await Customer.create(userData);
+        console.log(`✅ Akun untuk ${userData.email} berhasil dibuat!`);
+      }
     }
+    // ----------------------------------------
 
     process.exit();
 
