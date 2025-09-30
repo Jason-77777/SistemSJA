@@ -148,7 +148,7 @@ const ManagePackages = () => {
               <input type="text" name="durasiKursus" value={currentPackage.durasiKursus} onChange={handleFormChange} placeholder="Durasi (cth: 18 Jam (9 Hari))" required />
               <input type="number" name="harga" value={currentPackage.harga} onChange={handleFormChange} placeholder="Harga (cth: 2800000)" required />
               <div className="modal-actions">
-                <button type="button" className="button button-secondary" onClick={closeModal}>Batal</button>
+                <button type="button" className="button button-secondary" onClick={closeModal}>Batal Simpan</button>
                 <button type="submit" className="button button-primary">Simpan</button>
               </div>
             </form>
