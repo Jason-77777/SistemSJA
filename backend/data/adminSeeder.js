@@ -10,8 +10,8 @@ const Customer = require('../models/Customer'); // Sesuaikan path jika perlu
 const usersToSeed = [
   {
     username: 'admin',
-    email: 'admin@sja.com',
-    password: 'adminpassword', // Ganti dengan password yang aman
+    email: 'sjadrivinglesson@gmail.com',
+    password: 'sja123', // Ganti dengan password yang aman
     namaLengkap: 'Nissa',
     usia: 30,
     jenisKelamin: 'Wanita',
@@ -21,13 +21,13 @@ const usersToSeed = [
   },
   // --- TAMBAHKAN DATA DIREKTUR DI SINI ---
   {
-    username: 'direktur',
+    username: 'DM123',
     email: 'direktur@sja.com',
-    password: 'direkturpassword', // Ganti dengan password yang aman
-    namaLengkap: 'Jason',
-    usia: 35,
+    password: '182838', // Ganti dengan password yang aman
+    namaLengkap: 'Darta',
+    usia: 38,
     jenisKelamin: 'Pria',
-    noTelepon: '081234567890',
+    noTelepon: '085371154326',
     alamat: 'Kantor Pusat',
     role: 'direktur',
   }

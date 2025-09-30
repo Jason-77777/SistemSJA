@@ -22,7 +22,7 @@ const sendSuccessEmail = async (pendaftaran) => {
   const msg = {
     to: customer.email,
     //FROM MAU DIUBAH
-    from: 'jason.fan2828@gmail.com',
+    from: 'sjadrivinglesson@gmail.com',
     subject: `Invoice Lunas - Pendaftaran Kursus di CV. Sumatera Jaya Abadi`,
     html: emailHTML,
   };
