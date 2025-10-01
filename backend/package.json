@@ -5,6 +5,8 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
+    "frontend": "npm start --prefix ../frontend",
+    "dev": "concurrently \"npm run server\" \"cross-env PORT=3001 npm run frontend\"",
     "seed": "node data/adminSeeder.js",
     "seed:paket": "node data/paketSeeder.js",
     "seed:instruktur": "node data/instrukturSeeder.js",
@@ -30,6 +32,8 @@
     "react-icons": "^5.5.0"
   },
   "devDependencies": {
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
     "nodemon": "^3.1.10"
   }
 }

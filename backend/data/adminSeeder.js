@@ -22,7 +22,7 @@ const usersToSeed = [
   // --- TAMBAHKAN DATA DIREKTUR DI SINI ---
   {
     username: 'DM123',
-    email: 'direktur@sja.com',
+    email: 'dartamartok88@gmail.com',
     password: '182838', // Ganti dengan password yang aman
     namaLengkap: 'Darta',
     usia: 38,
