@@ -142,7 +142,7 @@ const MySchedule = () => {
                 <div className="session-table-wrapper">
                   <h4>Detail Sesi Belajar:</h4>
                   <p>Silakan menghubungi Admin untuk Perubahan Jadwal: <strong>Nissa 0895-3830-93463</strong></p>
-                  <p>Silakan menghubungi Admin untuk Pengurusan SIM Paket Complete: <strong>Nissa 0895-3830-93463</strong></p>
+                  <p>Jika Anda mengambil Paket Complete, Silakan menghubungi Admin untuk Pengurusan SIM: <strong>Nissa 0895-3830-93463</strong></p>
                   <p>Invoice pembayaran Anda telah dikirimkan ke email. Silakan periksa folder utama Gmail atau spam.</p>
                   <table className="session-table">
                     <thead><tr><th>Sesi</th><th>Tanggal</th><th>Jam</th></tr></thead>
