@@ -1,7 +1,7 @@
 {
   "name": "tes-final",
   "version": "1.0.0",
-  "main": "server-tes.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",

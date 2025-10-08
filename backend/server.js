@@ -46,6 +46,10 @@ app.use('/api/uploads', uploadRoutes);
 app.use('/api/laporan', laporanRoutes);
 app.use('/api/sesi', sesiRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Backend running OK ✅');
+});
+
 // Menjalankan server
 app.listen(port, () => {
   console.log(`Server berjalan di http://localhost:${port}`);
