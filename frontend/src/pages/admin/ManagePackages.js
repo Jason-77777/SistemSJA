@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ManagePackages.css'; // File CSS baru
+const API_BACKEND = 'https://backendsja-890420967859.asia-southeast2.run.app/'
 
 const initialState = {
   jenisKendaraan: 'Manual',
@@ -28,7 +29,7 @@ const ManagePackages = () => {
   const fetchPackages = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:3000/api/paket');
+      const response = await axios.get(`${API_BACKEND}/api/paket`);
       setAllPackages(response.data);
     } catch (err) {
       setError('Gagal memuat data paket.');
@@ -75,7 +76,7 @@ const ManagePackages = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    const url = modalMode === 'add' ? 'http://localhost:3000/api/paket' : `http://localhost:3000/api/paket/${currentPackage._id}`;
+    const url = modalMode === 'add' ? `${API_BACKEND}/api/paket` : `${API_BACKEND}/api/paket/${currentPackage._id}`;
     const method = modalMode === 'add' ? 'post' : 'patch';
 
     try {
@@ -93,7 +94,7 @@ const ManagePackages = () => {
     if (window.confirm('Apakah Anda yakin ingin menghapus paket ini?')) {
       const token = localStorage.getItem('token');
       try {
-        await axios.delete(`http://localhost:3000/api/paket/${id}`, { headers: { 'x-auth-token': token } });
+        await axios.delete(`${API_BACKEND}/api/paket/${id}`, { headers: { 'x-auth-token': token } });
         alert('Paket berhasil dihapus.');
         fetchPackages();
       } catch (err) {

@@ -1,16 +1,20 @@
-# Step 1: Build tahap frontend
-FROM node:18-alpine AS build
+FROM node:20 AS builder
 
 WORKDIR /app
+
 COPY package*.json ./
-RUN npm install
+RUN npm ci
+
 COPY . .
 RUN npm run build
 
-# Step 2: Serve hasil build dengan NGINX
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
+# Serve stage
+FROM node:20-slim
 
-# Ekspos port 80
+WORKDIR /app
+RUN npm install -g serve
+COPY --from=builder /app/build ./build
+
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+
+CMD ["serve", "-s", "build", "-l", "80", "--no-clipboard"]

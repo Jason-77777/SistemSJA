@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ManageInstructors.css'; // Pastikan file CSS ini ada di folder yang sama
+const API_BACKEND = 'https://backendsja-890420967859.asia-southeast2.run.app/'
 
 const initialState = {
   nama: '',
@@ -22,7 +23,7 @@ const ManageInstructors = () => {
   const fetchInstructors = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:3000/api/instruktur');
+      const response = await axios.get(`${API_BACKEND}/api/instruktur`);
       setInstructors(response.data);
     } catch (err) {
       setError('Gagal memuat data.');
@@ -59,8 +60,8 @@ const ManageInstructors = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     const url = modalMode === 'add'
-      ? 'http://localhost:3000/api/instruktur'
-      : `http://localhost:3000/api/instruktur/${currentInstructor._id}`;
+      ? `${API_BACKEND}/api/instruktur`
+      : `${API_BACKEND}/api/instruktur/${currentInstructor._id}`;
     const method = modalMode === 'add' ? 'post' : 'patch';
 
     try {
@@ -80,7 +81,7 @@ const ManageInstructors = () => {
     if (window.confirm('Apakah Anda yakin ingin menghapus instruktur ini?')) {
       const token = localStorage.getItem('token');
       try {
-        await axios.delete(`http://localhost:3000/api/instruktur/${id}`, {
+        await axios.delete(`${API_BACKEND}/api/instruktur/${id}`, {
           headers: { 'x-auth-token': token },
         });
         alert('Instruktur berhasil dihapus.');

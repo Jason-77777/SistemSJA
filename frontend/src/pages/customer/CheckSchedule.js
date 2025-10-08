@@ -6,6 +6,7 @@ import 'react-calendar/dist/Calendar.css';
 import './CheckSchedule.css'; // Pastikan path ini benar
 import { FaCalendarAlt, FaCar, FaClock } from 'react-icons/fa'; // Import Ikon
 import {Link } from 'react-router-dom';
+const API_BACKEND = 'https://backendsja-890420967859.asia-southeast2.run.app/'
 
 const CheckSchedule = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const CheckSchedule = () => {
       const tahun = activeDate.getFullYear();
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/jadwal/available`,
+          `${API_BACKEND}/api/jadwal/available`,
           { params: { jenisKendaraan, bulan, tahun } }
         );
         setAvailableSlots(response.data);

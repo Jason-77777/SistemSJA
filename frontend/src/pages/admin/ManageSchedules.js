@@ -3,6 +3,7 @@ import axios from 'axios';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './ManageSchedules.css';
+const API_BACKEND = 'https://backendsja-890420967859.asia-southeast2.run.app/'
 
 const timeSlotsOptions = [
   "08:00-10:00", "10:00-12:00", "12:00-14:00",
@@ -40,7 +41,7 @@ const ManageSchedules = () => {
   const fetchAllSchedules = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:3000/api/jadwal', {
+      const response = await axios.get(`${API_BACKEND}/api/jadwal`, {
         headers: { 'x-auth-token': token }
       });
       setAllSchedules(response.data);
@@ -53,7 +54,7 @@ const ManageSchedules = () => {
     const loadInitialData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get('http://localhost:3000/api/instruktur');
+        const res = await axios.get(`${API_BACKEND}/api/instruktur`);
         setInstructors(res.data);
         if (res.data.length > 0) {
           const defaultId = res.data[0]._id;
@@ -104,7 +105,7 @@ const ManageSchedules = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`http://localhost:3000/api/jadwal/${scheduleId}`, { status: newStatus }, { headers: { 'x-auth-token': token } });
+      await axios.patch(`${API_BACKEND}/api/jadwal/${scheduleId}`, { status: newStatus }, { headers: { 'x-auth-token': token } });
       await fetchAllSchedules();
       alert('Status jadwal berhasil diperbarui!');
     } catch (err) {
@@ -123,7 +124,7 @@ const ManageSchedules = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:3000/api/jadwal/${scheduleId}`, {
+      await axios.delete(`${API_BACKEND}/api/jadwal/${scheduleId}`, {
         headers: { 'x-auth-token': token }
       });
       alert('Jadwal berhasil dihapus!');
@@ -157,7 +158,7 @@ const ManageSchedules = () => {
     const token = localStorage.getItem('token');
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/jadwal/generate-bulk', generatorForm, { headers: { 'x-auth-token': token } });
+      const response = await axios.post(`${API_BACKEND}/api/jadwal/generate-bulk`, generatorForm, { headers: { 'x-auth-token': token } });
       alert(response.data.message);
       setShowGenerator(false);
       setGeneratorForm(initialFormState);
@@ -179,7 +180,7 @@ const ManageSchedules = () => {
     setLaporanLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://localhost:3000/api/laporan/unduh`, {
+      const response = await axios.get(`${API_BACKEND}/api/laporan/unduh`, {
         params: { startDate: startDateLaporan, endDate: endDateLaporan },
         headers: { 'x-auth-token': token },
         responseType: 'blob',
@@ -229,7 +230,7 @@ const ManageSchedules = () => {
         return;
       }
       const token = localStorage.getItem('token');
-      const resp = await axios.get('http://localhost:3000/api/daftar/all-for-admin', { headers: { 'x-auth-token': token } });
+      const resp = await axios.get(`${API_BACKEND}/api/daftar/all-for-admin`, { headers: { 'x-auth-token': token } });
       const daftarList = resp.data;
       const found = daftarList.find(d => d.jadwalSesi?.some(id => id._id.toString() === selectedFullSchedule._id));
       if (!found) {
@@ -246,7 +247,7 @@ const ManageSchedules = () => {
         console.error({ pendaftaranId, ...payload });
         return;
       }
-      await axios.patch(`http://localhost:3000/api/sesi/${pendaftaranId}/tukar`, payload, { headers: { 'x-auth-token': token } });
+      await axios.patch(`${API_BACKEND}/api/sesi/${pendaftaranId}/tukar`, payload, { headers: { 'x-auth-token': token } });
       alert('Sesi berhasil ditukar!');
       setShowTukarModal(false);
       await fetchAllSchedules();

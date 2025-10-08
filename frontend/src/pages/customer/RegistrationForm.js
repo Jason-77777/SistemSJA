@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './RegistrationForm.css'; // Import CSS baru
+const API_BACKEND = 'https://backendsja-890420967859.asia-southeast2.run.app/'
 
 const RegistrationForm = () => {
   // --- FUNGSI LOGIKA (TIDAK ADA PERUBAHAN) ---
@@ -17,7 +18,7 @@ const RegistrationForm = () => {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/paket');
+        const response = await axios.get(`${API_BACKEND}/api/paket`);
         const filtered = response.data.filter(pkg => pkg.jenisKendaraan === jenisKendaraan);
         setMasterPackages(filtered);
       } catch (error) {
@@ -66,7 +67,7 @@ const RegistrationForm = () => {
     setIsSubmitting(true);
     const token = localStorage.getItem('token');
     try {
-      const checkRes = await axios.post('http://localhost:3000/api/jadwal/check-booking', {
+      const checkRes = await axios.post(`${API_BACKEND}/api/jadwal/check-booking`, {
         paketId: finalPackage._id, startDate: date, jam: time, jenisKendaraan: jenisKendaraan,
       });
       if (!checkRes.data.available) {
@@ -74,7 +75,7 @@ const RegistrationForm = () => {
         setIsSubmitting(false);
         return;
       }
-      const daftarRes = await axios.post('http://localhost:3000/api/daftar', {
+      const daftarRes = await axios.post(`${API_BACKEND}/api/daftar`, {
         paketId: finalPackage._id, startDate: date, jam: time, jenisKendaraan: jenisKendaraan,
       }, { headers: { 'x-auth-token': token } });
       alert(daftarRes.data.message);

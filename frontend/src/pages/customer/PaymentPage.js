@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PaymentPage.css';
+const API_BACKEND = 'https://backendsja-890420967859.asia-southeast2.run.app/'
 
 const PaymentPage = () => {
   const { pendaftaranId } = useParams();
@@ -17,7 +18,7 @@ const PaymentPage = () => {
     const fetchPendaftaran = async () => {
       const token = localStorage.getItem('token');
       try {
-        const res = await axios.get(`http://localhost:3000/api/daftar/${pendaftaranId}`, {
+        const res = await axios.get(`${API_BACKEND}/api/daftar/${pendaftaranId}`, {
           headers: { 'x-auth-token': token }
         });
         setPendaftaran(res.data);
@@ -46,12 +47,12 @@ const PaymentPage = () => {
     formData.append('buktiBayar', selectedFile);
 
     try {
-      const uploadRes = await axios.post('http://localhost:3000/api/uploads', formData, {
+      const uploadRes = await axios.post(`${API_BACKEND}/api/uploads`, formData, {
         headers: { 'x-auth-token': token, 'Content-Type': 'multipart/form-data' }
       });
       const buktiBayarURL = uploadRes.data.url;
 
-      await axios.patch(`http://localhost:3000/api/daftar/${pendaftaranId}/upload-bukti`, 
+      await axios.patch(`${API_BACKEND}/api/daftar/${pendaftaranId}/upload-bukti`, 
         { buktiBayarURL: buktiBayarURL, nomorRekeningPengirim: nomorRekening },
         { headers: { 'x-auth-token': token } }
       );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const API_BACKEND = 'https://backendsja-890420967859.asia-southeast2.run.app/'
 
 const VerifyPayments = () => {
   const [payments, setPayments] = useState([]);
@@ -13,7 +14,7 @@ const VerifyPayments = () => {
       setMessage('');
       setError('');
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:3000/api/daftar/admin/verifikasi', {
+      const res = await axios.get(`${API_BACKEND}/api/daftar/admin/verifikasi`, {
         headers: { 'x-auth-token': token }
       });
       setPayments(res.data);
@@ -42,7 +43,7 @@ const VerifyPayments = () => {
       if (action === 'setujui') {
         // 1. Setujui pembayaran
         await axios.patch(
-          `http://localhost:3000/api/daftar/admin/verifikasi/${pendaftaran._id}`,
+          `${API_BACKEND}/api/daftar/admin/verifikasi/${pendaftaran._id}`,
           { action: 'setujui' },
           { headers: { 'x-auth-token': token } }
         );
@@ -50,7 +51,7 @@ const VerifyPayments = () => {
 
         // 2. Unduh invoice
         const downloadRes = await axios.get(
-          `http://localhost:3000/api/daftar/admin/invoice/${pendaftaran._id}`,
+          `${API_BACKEND}/api/daftar/admin/invoice/${pendaftaran._id}`,
           { 
             headers: { 'x-auth-token': token },
             responseType: 'blob'
@@ -69,7 +70,7 @@ const VerifyPayments = () => {
       
       // Aksi untuk Menolak (Tetap sama)
       } else {
-        const res = await axios.patch(`http://localhost:3000/api/daftar/admin/verifikasi/${pendaftaran._id}`, 
+        const res = await axios.patch(`${API_BACKEND}/api/daftar/admin/verifikasi/${pendaftaran._id}`, 
           { action: 'tolak' },
           { headers: { 'x-auth-token': token } }
         );
