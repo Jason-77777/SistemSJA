@@ -4,6 +4,7 @@ const PaketBelajar = require('../models/PaketBelajar');
 const Instruktur = require('../models/Instruktur');
 const { sendSuccessEmail } = require('../utils/emailService');
 const { generateInvoiceHTML } = require('../utils/invoiceTemplate');
+const puppeteer = require('puppeteer');
 
 const cleanupExpired = async () => {
   try {
@@ -271,33 +272,46 @@ exports.getAllPendaftaranForAdmin = async (req, res) => {
   }
 };
 
+// =============================================================
+// FUNGSI unduhInvoice DI FILE backend/controllers/daftarController.js
+// =============================================================
+
 exports.unduhInvoice = async (req, res) => {
-  try {
-    const { pendaftaranId } = req.params;
-    const pendaftaran = await Daftar.findById(pendaftaranId)
-      .populate('customerId', 'namaLengkap')
-      .populate('paketId')
-      .populate('instrukturId');
+  try {
+    const { pendaftaranId } = req.params;
+    const pendaftaran = await Daftar.findById(pendaftaranId)
+      .populate('customerId', 'namaLengkap')
+      .populate('paketId')
+      .populate('instrukturId');
 
-    if (!pendaftaran) {
-      return res.status(404).json({ message: 'Data pendaftaran tidak ditemukan.' });
-    }
+    if (!pendaftaran) {
+      return res.status(404).json({ message: 'Data pendaftaran tidak ditemukan.' });
+    }
 
-    const htmlContent = generateInvoiceHTML(pendaftaran);
-    const browser = await puppeteer.launch({ headless: 'new' });
-    const page = await browser.newPage();
-    await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
-    const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
-    await browser.close();
+    const htmlContent = generateInvoiceHTML(pendaftaran);
+    
+    // Perubahan penting ada di sini, dengan penambahan 'args'
+    const browser = await puppeteer.launch({
+      headless: 'new',
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox'
+      ]
+    });
+    
+    const page = await browser.newPage();
+    await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+    const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
+    await browser.close();
 
-    res.set({
-      'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment; filename="invoice-${pendaftaran.customerId.namaLengkap}-${pendaftaranId}.pdf"`,
-    });
-    res.send(pdfBuffer);
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `attachment; filename="invoice-${pendaftaran.customerId.namaLengkap}-${pendaftaranId}.pdf"`,
+    });
+    res.send(pdfBuffer);
 
-  } catch (error) {
-    console.error("Error saat membuat invoice PDF:", error);
-    res.status(500).json({ message: 'Gagal membuat invoice PDF.' });
-  }
+  } catch (error) {
+    console.error("Error saat membuat invoice PDF:", error);
+    res.status(500).json({ message: 'Gagal membuat invoice PDF.' });
+  }
 };
