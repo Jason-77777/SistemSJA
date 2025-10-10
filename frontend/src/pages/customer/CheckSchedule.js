@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios'; // --- DIHAPUS ---
+import api from '../../api'; // --- DIUBAH: Menggunakan file api.js ---
 import Calendar from 'react-calendar';
 import { useNavigate } from 'react-router-dom';
 import 'react-calendar/dist/Calendar.css';
 import './CheckSchedule.css'; // Pastikan path ini benar
 import { FaCalendarAlt, FaCar, FaClock } from 'react-icons/fa'; // Import Ikon
 import {Link } from 'react-router-dom';
-const API_BACKEND = 'https://backendsja-890420967859.asia-southeast2.run.app/'
+// const API_BACKEND = 'https://backendsja-890420967859.asia-southeast2.run.app/' // --- DIHAPUS ---
 
 const CheckSchedule = () => {
   const navigate = useNavigate();
@@ -25,8 +26,9 @@ const CheckSchedule = () => {
       const bulan = activeDate.getMonth() + 1;
       const tahun = activeDate.getFullYear();
       try {
-        const response = await axios.get(
-          `${API_BACKEND}/api/jadwal/available`,
+        // --- DIUBAH: Menggunakan 'api' dan path relatif ---
+        const response = await api.get(
+          '/api/jadwal/available',
           { params: { jenisKendaraan, bulan, tahun } }
         );
         setAvailableSlots(response.data);

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './RegistrationForm.css'; // Import CSS baru
-const API_BACKEND = 'https://backendsja-890420967859.asia-southeast2.run.app/'
+import api from '../../api'; // Menggunakan file api.js
+import './RegistrationForm.css';
 
 const RegistrationForm = () => {
-  // --- FUNGSI LOGIKA (TIDAK ADA PERUBAHAN) ---
   const { date, time, jenisKendaraan } = useParams();
   const navigate = useNavigate();
   const [masterPackages, setMasterPackages] = useState([]);
@@ -18,7 +16,8 @@ const RegistrationForm = () => {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await axios.get(`${API_BACKEND}/api/paket`);
+        // --- DIUBAH: Menggunakan 'api' dan path tanpa '/' di depan ---
+        const response = await api.get('api/paket');
         const filtered = response.data.filter(pkg => pkg.jenisKendaraan === jenisKendaraan);
         setMasterPackages(filtered);
       } catch (error) {
@@ -65,19 +64,23 @@ const RegistrationForm = () => {
       return;
     }
     setIsSubmitting(true);
-    const token = localStorage.getItem('token');
     try {
-      const checkRes = await axios.post(`${API_BACKEND}/api/jadwal/check-booking`, {
+      // --- DIUBAH: Menggunakan 'api' dan path tanpa '/' di depan ---
+      const checkRes = await api.post('api/jadwal/check-booking', {
         paketId: finalPackage._id, startDate: date, jam: time, jenisKendaraan: jenisKendaraan,
       });
+
       if (!checkRes.data.available) {
         alert(`Maaf, jadwal konflik: ${checkRes.data.message}`);
         setIsSubmitting(false);
         return;
       }
-      const daftarRes = await axios.post(`${API_BACKEND}/api/daftar`, {
+      
+      // --- DIUBAH: Menggunakan 'api' dan path tanpa '/' di depan ---
+      const daftarRes = await api.post('api/daftar', {
         paketId: finalPackage._id, startDate: date, jam: time, jenisKendaraan: jenisKendaraan,
-      }, { headers: { 'x-auth-token': token } });
+      });
+
       alert(daftarRes.data.message);
       navigate('/jadwalku');
     } catch (error) {
@@ -91,7 +94,6 @@ const RegistrationForm = () => {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 
-  // --- RENDER (DENGAN STRUKTUR JSX BARU) ---
   return (
     <div className="page-container">
       <div className="registration-header">

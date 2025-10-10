@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../api'; // --- DIUBAH: Menggunakan file api.js ---
 import { Link } from 'react-router-dom';
 import './MySchedule.css'; 
 
-// 1. Import komponen CountdownTimer 
 import CountdownTimer from '../../components/CountdownTimer';
 
 const MySchedule = () => {
@@ -11,29 +10,39 @@ const MySchedule = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchMySchedules = async () => {
-    try {
+  useEffect(() => {
+    const fetchMySchedules = async () => {
+      // Cek token dulu sebelum fetch
       const token = localStorage.getItem('token');
       if (!token) {
         setError('Anda harus login untuk melihat halaman ini.');
         setLoading(false);
         return;
       }
-      const response = await axios.get('/api/daftar/mine', { headers: { 'x-auth-token': token } });
-      if (Array.isArray(response.data)) {
-        setMySchedules(response.data);
-      } else {
-        setMySchedules([]);
-      }
-    } catch (err) {
-      setError('Gagal memuat jadwal Anda.');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  useEffect(() => {
+      try {
+        // --- DIUBAH: Menggunakan 'api' dan tanpa header manual ---
+        const response = await api.get('/api/daftar/mine');
+        
+        if (Array.isArray(response.data)) {
+          setMySchedules(response.data);
+        } else {
+          // Jika respons bukan array, anggap tidak ada jadwal
+          setMySchedules([]);
+        }
+      } catch (err) {
+        // Menangani error jika token tidak valid atau masalah server
+        if (err.response && err.response.status === 401) {
+            setError('Sesi Anda tidak valid. Silakan login kembali.');
+        } else {
+            setError('Gagal memuat jadwal Anda. Coba refresh halaman.');
+        }
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchMySchedules();
     window.addEventListener('focus', fetchMySchedules);
     return () => {
@@ -77,8 +86,6 @@ const MySchedule = () => {
                 <strong>Jam Default:</strong>
                 <p>{schedule.jam}</p>
               </div>
-
-              {/* --- PERUBAHAN DI SINI: Baris hanya akan tampil jika datanya ada --- */}
               {schedule.instrukturId?.nama && (
                 <div className="detail-item">
                   <strong>Instruktur:</strong>
@@ -97,16 +104,12 @@ const MySchedule = () => {
                   <p>{schedule.customerId.alamat}</p>
                 </div>
               )}
-              {/* --- AKHIR PERUBAHAN --- */}
-
               <div className={`status-banner ${getStatusClass(schedule.statusPembayaran)}`}>
                 <strong>Status Pembayaran:</strong> {schedule.statusPembayaran}
               </div>
-              
               <div className="action-area">
                 {schedule.statusPembayaran === 'Belum Bayar' && (
                   <>
-                    {/* Penambahan komponen timer */}
                     {schedule.paymentDueDate && <CountdownTimer expiryDate={schedule.paymentDueDate} />}
                     <Link to={`/bayar/${schedule._id}`}>
                       <button className="action-button button-bayar">Bayar Sekarang</button>
@@ -134,10 +137,8 @@ const MySchedule = () => {
                 )}
                 {schedule.statusPembayaran === 'Menunggu Verifikasi' && (
                   <p style={{ color: '#6c757d' }}>Silakan tunggu, pembayaran Anda sedang kami periksa. Silakan Periksa Spam Gmail Anda untuk Konfirmasi </p>
-                  
                 )}
               </div>
-
               {schedule.statusPembayaran === 'Lunas' && schedule.jadwalSesi && schedule.jadwalSesi.length > 0 && (
                 <div className="session-table-wrapper">
                   <h4>Detail Sesi Belajar:</h4>
