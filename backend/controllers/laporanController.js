@@ -1,8 +1,7 @@
 const Daftar = require('../models/Daftar');
 const { Parser } = require('json2csv');
 
-
-// --- TAMBAHKAN FUNGSI BANTUAN INI ---
+// --- FUNGSI BANTUAN INI TIDAK DIUBAH ---
 const calculateEndDate = (startDate, durationString) => {
   if (!startDate || !durationString) {
     return 'N/A';
@@ -37,6 +36,7 @@ exports.unduhLaporan = async (req, res) => {
       return res.status(400).json({ message: 'Harap tentukan tanggal mulai dan tanggal akhir.' });
     }
 
+    // --- KITA GUNAKAN KEMBALI LOGIKA LAMA ANDA UNTUK QUERY ---
     const start = new Date(startDate);
     const end = new Date(endDate);
     start.setHours(start.getHours() - 7);
@@ -47,23 +47,31 @@ exports.unduhLaporan = async (req, res) => {
       tanggalMulai: { $gte: start, $lte: end },
     })
     .populate('customerId', 'namaLengkap alamat noTelepon')
-    .populate('paketId') // Ambil semua field dari paket, termasuk durasi
+    .populate('paketId')
     .populate('instrukturId', 'nama nopolKendaraan');
 
-    // --- INI ADALAH JARING PENGAMANNYA ---
-    // Filter untuk membuang data yang 'link'-nya putus (misal: paketId atau customerId null)
     const dataValid = pendaftaranLunas.filter(p => p.customerId && p.paketId && p.instrukturId);
 
     if (dataValid.length === 0) {
       return res.status(404).json({ message: 'Tidak ada data laporan yang valid ditemukan untuk periode ini.' });
     }
 
-    // Gunakan 'dataValid' untuk diproses, bukan 'pendaftaranLunas'
+    // ================== PERUBAHAN UTAMA DI SINI ==================
     const dataLaporan = dataValid.map(p => {
       const tanggalSelesai = calculateEndDate(p.tanggalMulai, p.paketId.durasiKursus);
+      
+      // Buat tanggal baru dan tambahkan 7 jam untuk mengoreksi timezone
+      const correctedStartDate = new Date(p.tanggalMulai);
+      correctedStartDate.setHours(correctedStartDate.getHours() + 7);
+
+      const correctedEndDate = tanggalSelesai instanceof Date ? new Date(tanggalSelesai) : null;
+      if (correctedEndDate) {
+        correctedEndDate.setHours(correctedEndDate.getHours() + 7);
+      }
+
       return {
-        'Tanggal Mulai Kursus': new Date(p.tanggalMulai).toLocaleDateString('id-ID'),
-        'Tanggal Selesai Kursus': tanggalSelesai instanceof Date ? tanggalSelesai.toLocaleDateString('id-ID') : tanggalSelesai,
+        'Tanggal Mulai Kursus': correctedStartDate.toLocaleDateString('id-ID'),
+        'Tanggal Selesai Kursus': correctedEndDate ? correctedEndDate.toLocaleDateString('id-ID') : tanggalSelesai,
         'Nama Customer': p.customerId.namaLengkap,
         'Alamat Jemput': p.customerId.alamat,
         'No. Telepon': p.customerId.noTelepon,
@@ -74,6 +82,7 @@ exports.unduhLaporan = async (req, res) => {
         'Jam Belajar': p.jam,
       };
     });
+    // =============================================================
 
     const fields = [
       'Tanggal Mulai Kursus', 'Tanggal Selesai Kursus', 'Nama Customer', 

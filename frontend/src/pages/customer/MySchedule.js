@@ -136,7 +136,7 @@ const MySchedule = () => {
                   </>
                 )}
                 {schedule.statusPembayaran === 'Menunggu Verifikasi' && (
-                  <p style={{ color: '#6c757d' }}>Silakan tunggu, pembayaran Anda sedang kami periksa. Silakan Periksa Spam Gmail Anda untuk Konfirmasi </p>
+                  <p style={{ color: '#6c757d' }}>Silakan tunggu, pembayaran Anda sedang kami periksa. Silakan Periksa Spam Gmail Anda untuk Konfirmasi. Mohon Refresh Halaman untuk memeriksa Status Pembayaran </p>
                 )}
               </div>
               {schedule.statusPembayaran === 'Lunas' && schedule.jadwalSesi && schedule.jadwalSesi.length > 0 && (
