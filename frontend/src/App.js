@@ -22,7 +22,8 @@ import CheckSchedule from './pages/customer/CheckSchedule';
 import MySchedule from './pages/customer/MySchedule';
 import CourseInfo from './pages/customer/CourseInfo';
 import RegistrationForm from './pages/customer/RegistrationForm';
-import PaymentPage from './pages/customer/PaymentPage'; // DITAMBAHKAN
+import PaymentPage from './pages/customer/PaymentPage'; 
+import ReportPage from './pages/admin/ReportPage';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/admin/paket" element={<ManagePackages />} />
           <Route path="/admin/jadwal" element={<ManageSchedules />} />
           <Route path="/admin/verifikasi" element={<VerifyPayments />} />
+          <Route path="/admin/laporan" element={<ReportPage />} />
         </Route>
 
         {/* GRUP RUTE CUSTOMER (Dibungkus dengan CustomerLayout) */}

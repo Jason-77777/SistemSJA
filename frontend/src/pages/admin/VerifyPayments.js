@@ -126,7 +126,7 @@ const VerifyPayments = () => {
                   <td className="action-cell">
                     {/* --- TOMBOL INI MEMANGGIL FUNGSI YANG SUDAH DIPERBARUI --- */}
                     <button onClick={() => handleVerification(p, 'setujui')} className="button button-primary">
-                      Setujui & Unduh Invoice
+                      Setujui
                     </button>
                     <button onClick={() => handleVerification(p, 'tolak')} className="button button-delete">
                       Tolak

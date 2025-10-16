@@ -1,6 +1,6 @@
   import React from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-  import { FaTachometerAlt, FaCalendarAlt, FaUserTie, FaBoxOpen, FaCreditCard, FaSignOutAlt } from 'react-icons/fa'; // Menambahkan ikon
+  import { FaTachometerAlt, FaCalendarAlt, FaUserTie, FaBoxOpen, FaCreditCard, FaSignOutAlt, FaPrint} from 'react-icons/fa'; // Menambahkan ikon
 import '../index.css';
 
   // Objek 'styles' untuk menampung semua CSS kita
@@ -99,6 +99,7 @@ import '../index.css';
               <li><NavLink to="/admin/instruktur" style={({ isActive }) => ({ ...styles.navLink, ...(isActive && styles.navLinkActive) })}><FaUserTie /> Kelola Instruktur</NavLink></li>
               <li><NavLink to="/admin/paket" style={({ isActive }) => ({ ...styles.navLink, ...(isActive && styles.navLinkActive) })}><FaBoxOpen /> Kelola Paket</NavLink></li>
               <li><NavLink to="/admin/verifikasi" style={({ isActive }) => ({ ...styles.navLink, ...(isActive && styles.navLinkActive) })}><FaCreditCard /> Verifikasi Bayar</NavLink></li>
+              <li><NavLink to="/admin/laporan" style={({ isActive }) => ({ ...styles.navLink, ...(isActive && styles.navLinkActive) })}><FaPrint /> Cetak Laporan</NavLink></li>
             </ul>
           </nav>
           <button style={styles.logoutButton} onClick={handleLogout}>
