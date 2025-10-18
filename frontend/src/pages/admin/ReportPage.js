@@ -26,7 +26,8 @@ const ReportPage = () => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
-      const fileName = `laporan-pendaftaran-${startDateLaporan}-sampai-${endDateLaporan}.csv`;
+      // --- PERUBAHAN 1: Ganti ekstensi file menjadi .pdf ---
+      const fileName = `laporan-pendaftaran-${startDateLaporan}-sampai-${endDateLaporan}.pdf`;
       link.setAttribute('download', fileName);
       document.body.appendChild(link);
       link.click();
@@ -58,8 +59,9 @@ const ReportPage = () => {
             <input type="date" id="endDateLaporan" value={endDateLaporan} onChange={(e) => setEndDateLaporan(e.target.value)} />
           </div>
         </div>
+        {/* --- PERUBAHAN 2: Ganti teks tombol --- */}
         <button className="primary-button" onClick={handleDownloadLaporan} disabled={laporanLoading}>
-          {laporanLoading ? 'Memproses...' : 'Unduh Laporan CSV'}
+          {laporanLoading ? 'Memproses...' : 'Unduh Laporan PDF'}
         </button>
         {laporanError && <p style={{ color: 'red', marginTop: '10px' }}>{laporanError}</p>}
       </div>

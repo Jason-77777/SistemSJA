@@ -1,5 +1,6 @@
 const Daftar = require('../models/Daftar');
-const { Parser } = require('json2csv');
+const puppeteer = require('puppeteer'); // DIGANTI: dari json2csv menjadi puppeteer
+const { generateReportHTML } = require('../utils/reportTemplate'); // DITAMBAHKAN: template untuk PDF
 
 // --- FUNGSI BANTUAN INI TIDAK DIUBAH ---
 const calculateEndDate = (startDate, durationString) => {
@@ -36,7 +37,7 @@ exports.unduhLaporan = async (req, res) => {
       return res.status(400).json({ message: 'Harap tentukan tanggal mulai dan tanggal akhir.' });
     }
 
-    // --- KITA GUNAKAN KEMBALI LOGIKA LAMA ANDA UNTUK QUERY ---
+    // --- Logika Query Tetap Sama ---
     const start = new Date(startDate);
     const end = new Date(endDate);
     start.setHours(start.getHours() - 7);
@@ -52,15 +53,13 @@ exports.unduhLaporan = async (req, res) => {
 
     const dataValid = pendaftaranLunas.filter(p => p.customerId && p.paketId && p.instrukturId);
 
-    if (dataValid.length === 0) {
-      return res.status(404).json({ message: 'Tidak ada data laporan yang valid ditemukan untuk periode ini.' });
-    }
+    // Dihapus pengecekan dataValid.length agar PDF kosong tetap bisa dibuat jika tidak ada data
+    // if (dataValid.length === 0) { ... }
 
-    // ================== PERUBAHAN UTAMA DI SINI ==================
+    // --- Logika Mapping Data Tetap Sama ---
     const dataLaporan = dataValid.map(p => {
       const tanggalSelesai = calculateEndDate(p.tanggalMulai, p.paketId.durasiKursus);
       
-      // Buat tanggal baru dan tambahkan 7 jam untuk mengoreksi timezone
       const correctedStartDate = new Date(p.tanggalMulai);
       correctedStartDate.setHours(correctedStartDate.getHours() + 7);
 
@@ -82,23 +81,38 @@ exports.unduhLaporan = async (req, res) => {
         'Jam Belajar': p.jam,
       };
     });
-    // =============================================================
 
-    const fields = [
-      'Tanggal Mulai Kursus', 'Tanggal Selesai Kursus', 'Nama Customer', 
-      'Alamat Jemput', 'No. Telepon', 'Paket Kursus', 'Harga', 
-      'Instruktur', 'Nopol Kendaraan', 'Jam Belajar'
-    ];
+    // ========== MULAI PERUBAHAN DARI CSV KE PDF ==========
+    // 1. Generate HTML dari template
+    const htmlContent = generateReportHTML(dataLaporan, startDate, endDate);
     
-    const json2csvParser = new Parser({ fields });
-    const csv = json2csvParser.parse(dataLaporan);
+    // 2. Launch Puppeteer
+    const browser = await puppeteer.launch({
+      headless: 'new',
+      args: ['--no-sandbox', '--disable-setuid-sandbox'] // Argumen penting untuk environment produksi/Docker
+    });
+    
+    // 3. Buat PDF dari HTML
+    const page = await browser.newPage();
+    await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+    const pdfBuffer = await page.pdf({ 
+        format: 'A4', 
+        printBackground: true,
+        landscape: true, // Orientasi landscape agar tabel muat
+        margin: { top: '20px', right: '20px', bottom: '20px', left: '20px' }
+    });
+    await browser.close();
 
-    res.header('Content-Type', 'text/csv');
-    res.attachment(`laporan-pendaftaran-${startDate}-sd-${endDate}.csv`);
-    res.send(csv);
+    // 4. Kirim PDF ke client
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `attachment; filename="laporan-pendaftaran-${startDate}-sd-${endDate}.pdf"`,
+    });
+    res.send(pdfBuffer);
+    // ========== AKHIR PERUBAHAN ==========
 
   } catch (error) {
-    console.error("Error saat membuat laporan:", error);
-    res.status(500).json({ message: 'Server Error', error: error.message });
+    console.error("Error saat membuat laporan PDF:", error);
+    res.status(500).json({ message: 'Gagal membuat laporan PDF.', error: error.message });
   }
 };
