@@ -1,10 +1,5 @@
-// File: /controllers/instrukturController.js
-
 const Instruktur = require('../models/Instruktur');
 
-// @desc    Membuat instruktur baru
-// @route   POST /api/instruktur
-// @access  Private/Admin
 exports.createInstruktur = async (req, res) => {
   try {
     const instruktur = new Instruktur(req.body);
@@ -15,9 +10,6 @@ exports.createInstruktur = async (req, res) => {
   }
 };
 
-// @desc    Mendapatkan semua instruktur
-// @route   GET /api/instruktur
-// @access  Public (atau Private/Admin sesuai kebutuhan)
 exports.getAllInstruktur = async (req, res) => {
   try {
     const instruktur = await Instruktur.find({});
@@ -27,9 +19,6 @@ exports.getAllInstruktur = async (req, res) => {
   }
 };
 
-// @desc    Mendapatkan instruktur berdasarkan ID
-// @route   GET /api/instruktur/:id
-// @access  Public (atau Private/Admin)
 exports.getInstrukturById = async (req, res) => {
   try {
     const instruktur = await Instruktur.findById(req.params.id);
@@ -42,14 +31,11 @@ exports.getInstrukturById = async (req, res) => {
   }
 };
 
-// @desc    Memperbarui data instruktur
-// @route   PATCH /api/instruktur/:id
-// @access  Private/Admin
 exports.updateInstruktur = async (req, res) => {
   try {
     const instruktur = await Instruktur.findByIdAndUpdate(req.params.id, req.body, {
-      new: true, // Mengembalikan dokumen yang sudah diupdate
-      runValidators: true, // Menjalankan validator dari schema
+      new: true, 
+      runValidators: true, 
     });
     if (!instruktur) {
       return res.status(404).json({ message: 'Instruktur tidak ditemukan' });
@@ -60,9 +46,6 @@ exports.updateInstruktur = async (req, res) => {
   }
 };
 
-// @desc    Menghapus instruktur
-// @route   DELETE /api/instruktur/:id
-// @access  Private/Admin
 exports.deleteInstruktur = async (req, res) => {
   try {
     const instruktur = await Instruktur.findByIdAndDelete(req.params.id);

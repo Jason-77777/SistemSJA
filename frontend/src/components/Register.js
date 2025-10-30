@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '../api'; // DIUBAH: Menggunakan file api.js
+import api from '../api'; 
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/AuthForm.css';
 import logoSJA from '../assets/logo-sja.png'; 
@@ -23,7 +23,6 @@ const Register = () => {
     setError('');
     setSuccess('');
     try {
-      // DIUBAH: Menggunakan 'api' bukan 'axios'
       await api.post('/api/users/register', formData);
       
       setSuccess('Registrasi berhasil! Anda akan dialihkan ke halaman login...');

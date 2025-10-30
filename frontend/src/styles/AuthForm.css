@@ -1,27 +1,21 @@
-/* File: src/styles/AuthForm.css */
-
-/* --- Container Utama --- */
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding: 20px;
-  background-color: #ffffff; /* Background putih */
-  font-family: 'Montserrat', sans-serif; /* Font Montserrat */
-  color: #1a1a1a; /* Warna teks hitam */
+  background-color: #ffffff; 
+  font-family: 'Montserrat', sans-serif; 
+  color: #1a1a1a; 
 }
 
-/* ... kode .auth-header Anda ... */
-
-/* --- TAMBAHKAN CLASS INI --- */
 .auth-logo {
-  width: 80px;  /* Atur lebar logo */
-  height: 80px; /* Atur tinggi logo */
-  border-radius: 50%; /* Membuatnya bulat */
-  object-fit: cover; /* Memastikan gambar tidak gepeng */
-  margin-bottom: 20px; /* Jarak ke tulisan "Selamat Datang" */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sedikit bayangan */
+  width: 80px;  
+  height: 80px; 
+  border-radius: 50;
+  object-fit: cover; 
+  margin-bottom: 20px; 
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
 }
 
 
@@ -30,12 +24,11 @@
   width: 100%;
   max-width: 420px;
   padding: 40px;
-  background-color: #f9f9f9; /* Sedikit abu-abu agar form menonjol */
+  background-color: #f9f9f9; 
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Header Form --- */
 .auth-header {
   text-align: center;
   margin-bottom: 30px;
@@ -53,7 +46,7 @@
 }
 
 .auth-header a {
-  color: #007bff; /* Biru */
+  color: #007bff; 
   font-weight: 500;
   text-decoration: none;
 }
@@ -62,17 +55,15 @@
   text-decoration: underline;
 }
 
-
-/* --- Input Fields --- */
 .input-group {
   margin-bottom: 20px;
   position: relative;
 }
 
 .input-field, .auth-select-field {
-  box-sizing: border-box; /* PERBAIKAN: Agar padding tidak merusak lebar */
+  box-sizing: border-box; 
   width: 100%;
-  padding: 12px 12px 12px 40px; /* Padding untuk ikon */
+  padding: 12px 12px 12px 40px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
@@ -81,12 +72,12 @@
 }
 
 .auth-select-field {
-  padding: 12px; /* Padding normal untuk select field */
+  padding: 12px; 
 }
 
 .input-field:focus, .auth-select-field:focus {
   outline: none;
-  border-color: #007bff; /* Biru saat aktif */
+  border-color: #007bff; 
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
 }
 
@@ -98,12 +89,10 @@
   color: #999;
 }
 
-
-/* --- Tombol & Link --- */
 .auth-button {
   width: 100%;
   padding: 12px;
-  background-color: #007bff; /* Tombol Biru */
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 8px;
@@ -115,7 +104,7 @@
 }
 
 .auth-button:hover {
-  background-color: #0056b3; /* Biru lebih gelap saat hover */
+  background-color: #0056b3; 
 }
 
 .auth-button:active {
@@ -132,7 +121,6 @@
   background-size: 1em;
 }
 
-/* --- State Notifikasi --- */
 .notification {
   padding: 12px;
   margin-bottom: 20px;
@@ -151,7 +139,6 @@
   border: 1px solid #c3e6cb;
 }
 
-/* --- Media Query untuk Tampilan Mobile --- */
 @media (max-width: 480px) {
   .auth-form-wrapper {
     padding: 25px; 

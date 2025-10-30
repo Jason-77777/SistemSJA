@@ -1,10 +1,7 @@
-/* File: ManageInstructors.css */
-
-/* --- Tampilan Dasar Halaman --- */
 .page-container {
   padding: 24px;
   font-family: sans-serif;
-  background-color: #f8f9fa; /* Latar belakang abu-abu muda */
+  background-color: #f8f9fa; 
 }
 
 .page-header {
@@ -22,7 +19,6 @@
   color: #343a40;
 }
 
-/* --- Tombol-tombol --- */
 .button {
   border: none;
   padding: 10px 16px;
@@ -43,9 +39,7 @@
 .button-secondary { background-color: #6c757d; color: white; }
 .button:active { transform: scale(0.98); }
 
-/* --- Tabel Instruktur --- */
 .table-wrapper {
-  /* overflow-x: auto; DIHAPUS agar tidak ada scroll */
   background-color: #ffffff;
   border: 1px solid #dee2e6;
   border-radius: 8px;
@@ -58,7 +52,7 @@
 }
 
 .styled-table th, .styled-table td {
-  padding: 16px; /* Padding lebih besar */
+  padding: 16px; 
   border-bottom: 1px solid #dee2e6;
   text-align: left;
   vertical-align: middle;
@@ -83,7 +77,6 @@
   gap: 8px;
 }
 
-/* --- Modal (Pop-up) --- */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -99,10 +92,10 @@
 
 .modal-content {
   background-color: white;
-  padding: 32px; /* Padding lebih besar */
-  border-radius: 12px; /* Sudut lebih tumpul */
+  padding: 32px; 
+  border-radius: 12px;
   width: 90%;
-  max-width: 550px; /* Sedikit lebih lebar */
+  max-width: 550px; 
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
@@ -125,7 +118,7 @@
 
 .modal-content input, .modal-content select {
   width: 100%;
-  padding: 12px; /* Padding input lebih besar */
+  padding: 12px; 
   border: 1px solid #ced4da;
   border-radius: 6px;
   font-size: 14px;

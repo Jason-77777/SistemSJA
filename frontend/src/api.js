@@ -14,9 +14,6 @@ api.interceptors.request.use(
     if (token) {
       config.headers['x-auth-token'] = token;
     }
-    
-    // --- TAMBAHKAN 3 BARIS INI ---
-    // Instruksi agar tidak menggunakan cache
     config.headers['Cache-Control'] = 'no-cache';
     config.headers['Pragma'] = 'no-cache';
     config.headers['Expires'] = '0';

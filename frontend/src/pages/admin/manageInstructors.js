@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './ManageInstructors.css'; // Pastikan file CSS ini ada di folder yang sama
+import './ManageInstructors.css';
 const API_BACKEND = 'https://backendsja-890420967859.asia-southeast2.run.app/'
 
 const initialState = {
@@ -144,7 +144,6 @@ const ManageInstructors = () => {
       )}
 
       <div className="table-wrapper">
-        {/* Kode Tabel di bawah ini sama persis dengan kode Anda */}
         <table className="styled-table">
           <thead>
             <tr>

@@ -29,7 +29,6 @@ const VerifyPayments = () => {
     fetchPendingPayments();
   }, []);
 
-  // --- FUNGSI INI DIMODIFIKASI UNTUK MENGGABUNGKAN AKSI ---
   const handleVerification = async (pendaftaran, action) => {
     const actionText = action === 'setujui' ? 'MENYETUJUI' : 'MENOLAK';
     if (!window.confirm(`Anda yakin ingin ${actionText} pembayaran untuk ${pendaftaran.customerId?.namaLengkap}?`)) {
@@ -38,18 +37,13 @@ const VerifyPayments = () => {
     
     try {
       const token = localStorage.getItem('token');
-      
-      // Aksi untuk Menyetujui & Mengunduh
       if (action === 'setujui') {
-        // 1. Setujui pembayaran
         await axios.patch(
           `${API_BACKEND}/api/daftar/admin/verifikasi/${pendaftaran._id}`,
           { action: 'setujui' },
           { headers: { 'x-auth-token': token } }
         );
         alert('Pembayaran berhasil disetujui! Invoice akan segera diunduh.');
-
-        // 2. Unduh invoice
         const downloadRes = await axios.get(
           `${API_BACKEND}/api/daftar/admin/invoice/${pendaftaran._id}`,
           { 
@@ -68,7 +62,6 @@ const VerifyPayments = () => {
         link.remove();
         window.URL.revokeObjectURL(url);
       
-      // Aksi untuk Menolak (Tetap sama)
       } else {
         const res = await axios.patch(`${API_BACKEND}/api/daftar/admin/verifikasi/${pendaftaran._id}`, 
           { action: 'tolak' },
@@ -77,7 +70,6 @@ const VerifyPayments = () => {
         setMessage(res.data.message);
       }
       
-      // Muat ulang data di halaman setelah aksi selesai
       fetchPendingPayments();
 
     } catch (err) {
@@ -124,7 +116,6 @@ const VerifyPayments = () => {
                     </a>
                   </td>
                   <td className="action-cell">
-                    {/* --- TOMBOL INI MEMANGGIL FUNGSI YANG SUDAH DIPERBARUI --- */}
                     <button onClick={() => handleVerification(p, 'setujui')} className="button button-primary">
                       Setujui
                     </button>

@@ -1,13 +1,9 @@
-// File: data/instrukturSeeder.js
-
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Instruktur = require('../models/Instruktur'); // Sesuaikan path jika perlu
+const Instruktur = require('../models/Instruktur'); 
 
-// Load env vars
-dotenv.config({ path: './.env' }); // Sesuaikan path ke file .env Anda
+dotenv.config({ path: './.env' }); 
 
-// Data Instruktur Awal
 const instrukturs = [
   {
     nama: 'Agus',
@@ -51,7 +47,6 @@ const instrukturs = [
   },
 ];
 
-// Fungsi untuk menghubungkan ke DB
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
@@ -62,11 +57,10 @@ const connectDB = async () => {
   }
 };
 
-// Fungsi untuk import data
 const importData = async () => {
   try {
-    await Instruktur.deleteMany(); // Hapus data lama
-    await Instruktur.insertMany(instrukturs); // Masukkan data baru
+    await Instruktur.deleteMany(); 
+    await Instruktur.insertMany(instrukturs); 
     console.log('✅ Data Instruktur berhasil di-import!');
     process.exit();
   } catch (error) {
@@ -75,7 +69,6 @@ const importData = async () => {
   }
 };
 
-// Fungsi untuk destroy data
 const destroyData = async () => {
   try {
     await Instruktur.deleteMany();
@@ -87,7 +80,6 @@ const destroyData = async () => {
   }
 };
 
-// Logika untuk menjalankan fungsi via command line
 const run = async () => {
     await connectDB();
     if (process.argv[2] === '-d') {

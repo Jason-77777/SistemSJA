@@ -33,10 +33,9 @@ exports.checkBookingAvailability = async (req, res) => {
     if (!match) { return res.status(400).json({ message: 'Format durasi paket tidak valid.' }); }
     const jumlahHari = parseInt(match[1], 10);
 
-    // --- SOLUSI CEPAT: TAMBAHKAN 7 JAM UNTUK KOMPENSASI TIMEZONE ---
     const requiredDates = [];
     const initialDate = new Date(startDate);
-    initialDate.setHours(initialDate.getHours() + 7); // Tambahkan 7 jam
+    initialDate.setHours(initialDate.getHours() + 7); 
 
     let currentDate = new Date(Date.UTC(initialDate.getUTCFullYear(), initialDate.getUTCMonth(), initialDate.getUTCDate()));
 
@@ -78,21 +77,17 @@ exports.generateBulkSchedules = async (req, res) => {
     
     const newSchedules = [];
 
-    // --- PERBAIKAN TIMEZONE DENGAN LOGGING ---
     const localStartDate = new Date(startDate);
     const localEndDate = new Date(endDate);
     
-    // Ini adalah metode yang kita yakini benar, mari kita buktikan
     let currentDate = new Date(Date.UTC(localStartDate.getUTCFullYear(), localStartDate.getUTCMonth(), localStartDate.getUTCDate()));
     const lastDate = new Date(Date.UTC(localEndDate.getUTCFullYear(), localEndDate.getUTCMonth(), localEndDate.getUTCDate()));
 
-    // --- TAMBAHAN CONSOLE LOG SEBAGAI TRACKER ---
     console.log('--- BULK SCHEDULE GENERATION ---');
     console.log('Input Start Date (dari Admin):', startDate);
     console.log('Input End Date (dari Admin):', endDate);
     console.log('Tanggal Mulai Terkonversi (UTC):', currentDate.toISOString());
     console.log('Tanggal Selesai Terkonversi (UTC):', lastDate.toISOString());
-    // --- AKHIR TRACKER ---
 
     while (currentDate <= lastDate) {
       const dayOfWeek = currentDate.getUTCDay();
@@ -107,12 +102,10 @@ exports.generateBulkSchedules = async (req, res) => {
       currentDate.setUTCDate(currentDate.getUTCDate() + 1);
     }
 
-    // --- TAMBAHAN CONSOLE LOG UNTUK JADWAL PERTAMA ---
     if (newSchedules.length > 0) {
       console.log('Contoh jadwal pertama yang akan disimpan:', newSchedules[0]);
     }
     console.log('------------------------------------');
-    // --- AKHIR TRACKER ---
 
     if (newSchedules.length === 0) { return res.status(400).json({ message: 'Tidak ada jadwal yang bisa digenerate.' }); }
     
@@ -124,8 +117,6 @@ exports.generateBulkSchedules = async (req, res) => {
   }
 };
 
-// ... SISA FILE SAMA SEPERTI YANG ANDA KIRIM ...
-// (getAllJadwal, getJadwalById, dll tidak perlu diubah)
 exports.createJadwal = async (req, res) => {
   try {
     const newJadwal = new Jadwal(req.body);

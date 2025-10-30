@@ -1,5 +1,3 @@
-// File: /models/PaketBelajar.js
-
 const mongoose = require('mongoose');
 
 const paketBelajarSchema = new mongoose.Schema({
@@ -15,13 +13,11 @@ const paketBelajarSchema = new mongoose.Schema({
   },
   paketKursus: {
     type: String,
-    // DIUPDATE: Menambahkan semua variasi paket
-    enum: ['Reguler', 'Complete', 'Duo Reguler', 'Duo Complete'], 
+    enum: ['Reguler', 'Complete'], 
     required: [true, 'Paket kursus wajib diisi'],
   },
   jumlahSiswaBelajar: {
     type: String,
-    // DIUPDATE: Menambahkan '2 Siswa' sebagai pilihan valid
     enum: ['1 Siswa', '2 Siswa'],
     required: [true, 'Jumlah siswa wajib diisi'],
   },

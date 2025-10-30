@@ -22,14 +22,7 @@ const CourseInfo = () => {
             <h3><FaSimCard style={{ color: '#20c997' }} /> Complete</h3>
             <p>Paket kursus mengemudi lengkap dengan bantuan pengurusan SIM A.</p>
           </div>
-          {/* <div className="info-card">
-            <h3><FaUsers style={{ color: '#6f42c1' }} /> Duo</h3>
-            <p>Paket hemat untuk 2 siswa yang belajar bersama dengan jadwal yang sama.</p>
-          </div> */}
         </div>
-        {/* <p style={{ textAlign: 'center', marginTop: '16px', fontSize: '14px', color: '#6c757d' }}>
-          <strong>Catatan:</strong> Paket "Duo Reguler" berarti kursus untuk 2 siswa, sedangkan "Duo Complete" berarti kursus dan pengurusan SIM untuk 2 siswa.
-        </p> */}
       </div>
 
       <div className="info-section">

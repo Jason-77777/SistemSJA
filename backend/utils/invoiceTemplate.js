@@ -1,5 +1,3 @@
-// File: backend/utils/invoiceTemplate.js
-
 const generateInvoiceHTML = (pendaftaran) => {
   const { customerId, paketId, tanggalMulai, jam, instrukturId } = pendaftaran;
   const harga = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(paketId.harga);

@@ -1,8 +1,5 @@
-// File: /controllers/paketBelajarController.js
-
 const PaketBelajar = require('../models/PaketBelajar');
 
-// Membuat paket belajar baru
 exports.createPaketBelajar = async (req, res) => {
   try {
     const paket = new PaketBelajar(req.body);
@@ -13,7 +10,6 @@ exports.createPaketBelajar = async (req, res) => {
   }
 };
 
-// Mendapatkan semua paket belajar
 exports.getAllPaketBelajar = async (req, res) => {
   try {
     const paket = await PaketBelajar.find({});
@@ -23,7 +19,6 @@ exports.getAllPaketBelajar = async (req, res) => {
   }
 };
 
-// Memperbarui paket belajar
 exports.updatePaketBelajar = async (req, res) => {
   try {
     const paket = await PaketBelajar.findByIdAndUpdate(req.params.id, req.body, {
@@ -39,7 +34,6 @@ exports.updatePaketBelajar = async (req, res) => {
   }
 };
 
-// Menghapus paket belajar
 exports.deletePaketBelajar = async (req, res) => {
   try {
     const paket = await PaketBelajar.findByIdAndDelete(req.params.id);

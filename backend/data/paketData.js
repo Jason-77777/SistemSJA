@@ -1,5 +1,3 @@
-// File: /data/paketData.js
-
 const paketData = [
   {
     jenisKendaraan: "Manual",

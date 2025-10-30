@@ -1,11 +1,10 @@
-/* File: src/pages/CourseInfo.css */
 
 .page-container {
   max-width: 900px;
   margin: 0 auto;
   padding: 40px 24px;
   font-family: 'Montserrat', sans-serif;
-  background-color: #f8f9fa; /* Latar belakang sedikit abu-abu */
+  background-color: #f8f9fa; 
 }
 
 .page-header {
@@ -17,7 +16,7 @@
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #2c3e50; /* Warna biru gelap untuk judul utama */
+  color: #2c3e50; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +25,7 @@
 
 .page-header p {
   font-size: 16px;
-  color: #6c757d; /* Warna abu-abu untuk sub-judul */
+  color: #6c757d;
 }
 
 .info-section {
@@ -34,7 +33,7 @@
   padding: 32px;
   border-radius: 12px;
   margin-bottom: 32px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06); /* Shadow lebih halus */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06); 
   border: 1px solid #e9ecef;
 }
 
@@ -42,7 +41,7 @@
   text-align: center;
   margin-top: 0;
   margin-bottom: 24px;
-  color: #343a40; /* Warna abu-abu gelap */
+  color: #343a40;
 }
 
 .info-grid {
@@ -54,9 +53,9 @@
 .info-card {
   text-align: center;
   padding: 24px;
-  border: 1px solid transparent; /* Hapus border default */
+  border: 1px solid transparent; 
   border-radius: 8px;
-  background-color: #f8f9fa; /* Latar kartu sedikit abu-abu */
+  background-color: #f8f9fa; 
 }
 
 .info-card h3 {
@@ -79,7 +78,7 @@
 .action-footer {
   text-align: center;
   padding: 32px;
-  background-color: #e6f7ff; /* Latar belakang biru muda */
+  background-color: #e6f7ff; 
   border-radius: 12px;
 }
 

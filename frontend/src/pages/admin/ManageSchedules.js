@@ -19,7 +19,6 @@ const initialFormState = {
 };
 
 const ManageSchedules = () => {
-  // --- STATE MANAGEMENT ---
   const [allSchedules, setAllSchedules] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,7 +32,6 @@ const ManageSchedules = () => {
   const [availableSchedules, setAvailableSchedules] = useState([]);
   const [calendarDate, setCalendarDate] = useState(new Date());
 
-  // --- DATA FETCHING & EFFECTS ---
   const fetchAllSchedules = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -80,8 +78,6 @@ const ManageSchedules = () => {
     setGroupedSchedules(grouped);
   }, [allSchedules, selectedDate]);
 
-
-  // --- EVENT HANDLERS ---
   const handleRefresh = async () => {
     setLoading(true);
     await fetchAllSchedules();
@@ -110,9 +106,7 @@ const ManageSchedules = () => {
       setLoading(false);
     }
   };
-  
-  // =================================================================
-  // --- KODE BARU DITAMBAHKAN DI SINI ---
+
   const handleDelete = async (scheduleId) => {
     if (!window.confirm('Apakah Anda yakin ingin menghapus jadwal ini secara permanen?')) {
       return;
@@ -131,9 +125,7 @@ const ManageSchedules = () => {
       setLoading(false);
     }
   };
-  // --- AKHIR DARI KODE BARU ---
-  // =================================================================
-
+ 
   const handleGeneratorChange = (e) => {
     setGeneratorForm({ ...generatorForm, [e.target.name]: e.target.value });
   };
@@ -233,7 +225,6 @@ const ManageSchedules = () => {
     return null;
   };
 
-  // --- RENDER ---
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -316,8 +307,6 @@ const ManageSchedules = () => {
                         {schedule.status}
                       </span>
                     </td>
-                    {/* ================================================================= */}
-                    {/* --- BAGIAN INI DIMODIFIKASI --- */}
                     <td>
                       {schedule.status === 'Penuh' || schedule.status === 'Pending' ? (
                         <button onClick={() => handleKelolaClick(schedule)}>Kelola</button>
@@ -348,8 +337,6 @@ const ManageSchedules = () => {
                         </div>
                       )}
                     </td>
-                    {/* --- AKHIR DARI MODIFIKASI --- */}
-                    {/* ================================================================= */}
                   </tr>
                 ))
               ))}

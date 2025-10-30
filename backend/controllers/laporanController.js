@@ -1,8 +1,7 @@
 const Daftar = require('../models/Daftar');
-const puppeteer = require('puppeteer'); // DIGANTI: dari json2csv menjadi puppeteer
-const { generateReportHTML } = require('../utils/reportTemplate'); // DITAMBAHKAN: template untuk PDF
+const puppeteer = require('puppeteer'); 
+const { generateReportHTML } = require('../utils/reportTemplate'); 
 
-// --- FUNGSI BANTUAN INI TIDAK DIUBAH ---
 const calculateEndDate = (startDate, durationString) => {
   if (!startDate || !durationString) {
     return 'N/A';
@@ -19,14 +18,13 @@ const calculateEndDate = (startDate, durationString) => {
 
   while (daysAdded < totalDays) {
     currentDate.setDate(currentDate.getDate() + 1);
-    if (currentDate.getDay() !== 0) { // Lewati hari Minggu
+    if (currentDate.getDay() !== 0) { 
       daysAdded++;
     }
   }
 
   return currentDate;
 };
-// ------------------------------------
 
 
 exports.unduhLaporan = async (req, res) => {
@@ -37,7 +35,6 @@ exports.unduhLaporan = async (req, res) => {
       return res.status(400).json({ message: 'Harap tentukan tanggal mulai dan tanggal akhir.' });
     }
 
-    // --- Logika Query Tetap Sama ---
     const start = new Date(startDate);
     const end = new Date(endDate);
     start.setHours(start.getHours() - 7);
@@ -53,10 +50,6 @@ exports.unduhLaporan = async (req, res) => {
 
     const dataValid = pendaftaranLunas.filter(p => p.customerId && p.paketId && p.instrukturId);
 
-    // Dihapus pengecekan dataValid.length agar PDF kosong tetap bisa dibuat jika tidak ada data
-    // if (dataValid.length === 0) { ... }
-
-    // --- Logika Mapping Data Tetap Sama ---
     const dataLaporan = dataValid.map(p => {
       const tanggalSelesai = calculateEndDate(p.tanggalMulai, p.paketId.durasiKursus);
       
@@ -82,34 +75,28 @@ exports.unduhLaporan = async (req, res) => {
       };
     });
 
-    // ========== MULAI PERUBAHAN DARI CSV KE PDF ==========
-    // 1. Generate HTML dari template
     const htmlContent = generateReportHTML(dataLaporan, startDate, endDate);
-    
-    // 2. Launch Puppeteer
+
     const browser = await puppeteer.launch({
       headless: 'new',
-      args: ['--no-sandbox', '--disable-setuid-sandbox'] // Argumen penting untuk environment produksi/Docker
+      args: ['--no-sandbox', '--disable-setuid-sandbox'] 
     });
     
-    // 3. Buat PDF dari HTML
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
     const pdfBuffer = await page.pdf({ 
         format: 'A4', 
         printBackground: true,
-        landscape: true, // Orientasi landscape agar tabel muat
+        landscape: true, 
         margin: { top: '20px', right: '20px', bottom: '20px', left: '20px' }
     });
     await browser.close();
 
-    // 4. Kirim PDF ke client
     res.set({
       'Content-Type': 'application/pdf',
       'Content-Disposition': `attachment; filename="laporan-pendaftaran-${startDate}-sd-${endDate}.pdf"`,
     });
     res.send(pdfBuffer);
-    // ========== AKHIR PERUBAHAN ==========
 
   } catch (error) {
     console.error("Error saat membuat laporan PDF:", error);

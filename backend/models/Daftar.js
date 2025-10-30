@@ -11,14 +11,10 @@ const daftarSchema = new mongoose.Schema({
     ref: 'PaketBelajar',
     required: true,
   },
-  // --- [PERUBAHAN]: Ganti jadwalId dengan jadwalSesi ---
-  // jadwalId kita hapus karena hanya bisa menyimpan satu ID.
-  // jadwalSesi bisa menyimpan BANYAK ID, membuatnya lebih fleksibel.
   jadwalSesi: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Jadwal',
   }],
-  // ----------------------------------------------------
   instrukturId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Instruktur',
@@ -47,7 +43,6 @@ const daftarSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  //PENAMBAHAN DISINI
   paymentDueDate: {
     type: Date,
   },

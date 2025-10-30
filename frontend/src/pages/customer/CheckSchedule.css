@@ -1,16 +1,12 @@
-/* File: src/pages/CheckSchedule.css */
-
-/* --- Latar Belakang & Font Dasar --- */
 .page-container {
   max-width: 900px;
   margin: 0 auto;
   padding: 24px;
   font-family: 'Montserrat', sans-serif;
-  background-color: #f8f9fa; /* Latar belakang sedikit abu-abu */
+  background-color: #f8f9fa; 
   min-height: 100vh;
 }
 
-/* --- Header --- */
 .page-header {
   text-align: center;
   margin-bottom: 32px;
@@ -28,10 +24,8 @@
 
 .page-header p {
   font-size: 16px;
-  color: #6c757d; /* Abu-abu untuk sub-judul */
-}
+  color: #6c757d; }
 
-/* --- Kontrol & Dropdown --- */
 .controls-container {
   display: flex;
   justify-content: center;
@@ -41,7 +35,7 @@
   padding: 16px;
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Tambahan shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
   border: 1px solid #e0e0e0;
 }
 
@@ -57,7 +51,6 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-/* --- Layout Utama (Kalender & Slot) --- */
 .scheduler-container {
   display: flex;
   gap: 30px;
@@ -69,9 +62,9 @@
   min-width: 350px;
   background-color: #ffffff;
   padding: 20px;
-  border-radius: 12px; /* Sudut lebih tumpul */
+  border-radius: 12px; 
   border: 1px solid #e0e0e0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Tambahan shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .slots-wrapper {
@@ -83,11 +76,10 @@
   margin-top: 0;
   font-weight: 700;
   padding-bottom: 8px;
-  border-bottom: 2px solid #007bff; /* Garis bawah biru */
+  border-bottom: 2px solid #007bff; 
   display: inline-block;
 }
 
-/* --- Gaya Kalender --- */
 .calendar-wrapper .react-calendar {
   border: none;
   width: 100%;
@@ -115,8 +107,6 @@
   font-weight: 600;
 }
 
-
-/* --- Kartu Slot Waktu --- */
 .slots-list {
   display: flex;
   flex-direction: column;
@@ -163,7 +153,6 @@
   background-color: #218838;
 }
 
-/* --- Aturan untuk Mobile --- */
 @media (max-width: 768px) {
   .scheduler-container {
     flex-direction: column;
@@ -175,7 +164,6 @@
     font-size: 24px;
   }
 }
-/* Di dalam file CheckSchedule.css */
 
 .info-link {
   font-size: 14px;
@@ -183,11 +171,11 @@
 }
 
 .info-link a {
-  color: #007bff; /* Warna biru */
+  color: #007bff; 
   font-weight: 600;
   text-decoration: none;
 }
 
 .info-link a:hover {
-  text-decoration: underline; /* Garis bawah saat hover */
+  text-decoration: underline; 
 }

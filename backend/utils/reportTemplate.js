@@ -1,14 +1,9 @@
-// File: backend/utils/reportTemplate.js
-
 const generateReportHTML = (dataLaporan, startDate, endDate) => {
-  // Format tanggal periode untuk ditampilkan di header
   const periodeMulai = new Date(startDate).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
   const periodeSelesai = new Date(endDate).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
 
-  // URL Logo Anda di Cloudinary (ganti jika perlu)
   const logoUrl = "https://res.cloudinary.com/dxwxmdqdp/image/upload/v1758978696/LOGO_SJA_PNG_ispo8e.png";
 
-  // Fungsi untuk membuat baris tabel dari data
   const createTableRows = () => {
     if (!dataLaporan || dataLaporan.length === 0) {
       return '<tr><td colspan="10" style="text-align:center;">Tidak ada data untuk periode ini.</td></tr>';

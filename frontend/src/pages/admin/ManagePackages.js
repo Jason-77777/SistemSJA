@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './ManagePackages.css'; // File CSS baru
+import './ManagePackages.css'; 
 const API_BACKEND = 'https://backendsja-890420967859.asia-southeast2.run.app/'
 
 const initialState = {
@@ -13,19 +13,16 @@ const initialState = {
 };
 
 const ManagePackages = () => {
-  // --- STATE MANAGEMENT ---
   const [allPackages, setAllPackages] = useState([]);
   const [filteredPackages, setFilteredPackages] = useState([]);
-  const [filter, setFilter] = useState('Semua'); // State untuk filter: 'Semua', 'Manual', 'Matic'
+  const [filter, setFilter] = useState('Semua'); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
-  // State untuk Modal
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState('add');
   const [currentPackage, setCurrentPackage] = useState(initialState);
 
-  // --- DATA FETCHING & FILTERING ---
   const fetchPackages = async () => {
     try {
       setLoading(true);
@@ -44,7 +41,6 @@ const ManagePackages = () => {
   }, []);
 
   useEffect(() => {
-    // Efek ini berjalan setiap kali filter atau data utama berubah
     if (filter === 'Semua') {
       setFilteredPackages(allPackages);
     } else {
@@ -53,7 +49,6 @@ const ManagePackages = () => {
     }
   }, [filter, allPackages]);
 
-  // --- EVENT HANDLERS (MODAL, FORM, DELETE) ---
   const openModal = (mode, pkg = null) => {
     setModalMode(mode);
     if (mode === 'edit' && pkg) {
@@ -103,8 +98,6 @@ const ManagePackages = () => {
       }
     }
   };
-
-  // --- RENDER ---
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -131,8 +124,6 @@ const ManagePackages = () => {
               <select name="paketKursus" value={currentPackage.paketKursus} onChange={handleFormChange}>
                 <option value="Reguler">Reguler</option>
                 <option value="Complete">Complete</option>
-                {/* <option value="Duo Reguler">Duo Reguler</option>
-                <option value="Duo Complete">Duo Complete</option> */}
               </select>
               <select name="jenisKendaraan" value={currentPackage.jenisKendaraan} onChange={handleFormChange}>
                 <option value="Manual">Manual</option>
@@ -140,11 +131,9 @@ const ManagePackages = () => {
               </select>
               <select name="jenisHari" value={currentPackage.jenisHari} onChange={handleFormChange}>
                 <option value="Senin-Sabtu">Senin-Sabtu</option>
-                {/* <option value="Libur Umum">Libur Umum</option> */}
               </select>
               <select name="jumlahSiswaBelajar" value={currentPackage.jumlahSiswaBelajar} onChange={handleFormChange}>
                 <option value="1 Siswa">1 Siswa</option>
-                {/* <option value="2 Siswa">2 Siswa</option> */}
               </select>
               <input type="text" name="durasiKursus" value={currentPackage.durasiKursus} onChange={handleFormChange} placeholder="Durasi (cth: 18 Jam (9 Hari))" required />
               <input type="number" name="harga" value={currentPackage.harga} onChange={handleFormChange} placeholder="Harga (cth: 2800000)" required />

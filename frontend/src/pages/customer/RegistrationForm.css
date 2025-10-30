@@ -1,14 +1,11 @@
-/* File: src/pages/RegistrationForm.css */
-
 .page-container {
   max-width: 600px;
-  margin: 40px auto; /* Memberi jarak atas/bawah dan otomatis di tengah */
+  margin: 40px auto; 
   padding: 24px;
   font-family: 'Montserrat', sans-serif;
   background-color: #f8f9fa;
 }
 
-/* --- Header Pendaftaran --- */
 .registration-header {
   text-align: center;
   margin-bottom: 24px;
@@ -42,7 +39,6 @@
   color: #6c757d;
 }
 
-/* --- Form Pilihan Paket --- */
 .package-selection-form {
   display: flex;
   flex-direction: column;
@@ -72,14 +68,12 @@
   font-family: 'Montserrat', sans-serif;
   background-color: white;
 }
-
-/* --- Ringkasan & Submit --- */
 .summary-card {
   margin-top: 20px;
   padding: 20px;
-  border: 2px solid #007bff; /* Border biru untuk menonjol */
+  border: 2px solid #007bff; 
   border-radius: 8px;
-  background-color: #e6f7ff; /* Latar biru muda */
+  background-color: #e6f7ff; 
 }
 
 .summary-card h3 {
@@ -99,7 +93,7 @@
   width: 100%;
   padding: 14px;
   margin-top: 16px;
-  background-color: #28a745; /* Tombol hijau untuk submit */
+  background-color: #28a745; 
   color: white;
   border: none;
   border-radius: 8px;

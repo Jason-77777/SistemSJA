@@ -1,10 +1,8 @@
 import React from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 
-// --- PENAMBAHAN: Import logo Anda ---
 import logoSJA from '../assets/logo-sja.png'; 
 
-// Objek 'styles' untuk menampung semua CSS kita
 const styles = {
   pageWrapper: {
     fontFamily: "'Montserrat', sans-serif",
@@ -29,7 +27,6 @@ const styles = {
     width: '100%',
     maxWidth: '1200px',
   },
-  // --- PERUBAHAN: Style untuk logo ---
   logoContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -37,35 +34,32 @@ const styles = {
     textDecoration: 'none',
   },
   logoImage: {
-    height: '40px', // Atur ukuran tinggi logo
+    height: '40px', 
     width: '40px',
-    borderRadius: '50%', // Membuat gambar logo bulat
+    borderRadius: '50%', 
   },
   logoText: {
     fontWeight: '700',
     fontSize: '24px',
     color: '#2c3e50',
   },
-  // ------------------------------------
   navLinks: {
     display: 'flex',
-    gap: '8px', // Perkecil jarak antar link
+    gap: '8px', 
   },
-  // --- PERUBAHAN: Style untuk link navigasi ---
   navLink: {
     color: '#6c757d',
     textDecoration: 'none',
     fontWeight: '500',
     fontSize: '16px',
-    padding: '10px 20px', // Beri padding agar area klik lebih besar
-    borderRadius: '6px', // Sudut tumpul
+    padding: '10px 20px', 
+    borderRadius: '6px', 
     transition: 'background-color 0.2s, color 0.2s',
   },
   navLinkActive: {
-    backgroundColor: '#007bff', // Latar belakang biru untuk link aktif
+    backgroundColor: '#007bff', 
     color: '#ffffff',
   },
-  // ------------------------------------------
   logoutButton: {
     backgroundColor: '#dc3545',
     color: 'white',
@@ -97,12 +91,10 @@ const CustomerLayout = () => {
     <div style={styles.pageWrapper}>
       <header style={styles.header}>
         <div style={styles.navContainer}>
-          {/* --- PERUBAHAN: Tampilkan logo dan teks --- */}
           <NavLink to="/home" style={styles.logoContainer}>
             <img src={logoSJA} alt="Logo SJA" style={styles.logoImage} />
             <span style={styles.logoText}>SJA Kursus</span>
           </NavLink>
-          {/* ----------------------------------------- */}
           <nav style={styles.navLinks}>
             <NavLink to="/home" style={({ isActive }) => ({ ...styles.navLink, ...(isActive && styles.navLinkActive) })}>Home</NavLink>
             <NavLink to="/cek-jadwal" style={({ isActive }) => ({ ...styles.navLink, ...(isActive && styles.navLinkActive) })}>Cek Jadwal</NavLink>

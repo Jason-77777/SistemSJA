@@ -1,19 +1,16 @@
 const Customer = require('../models/Customer');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken'); // Tambahkan ini
+const jwt = require('jsonwebtoken'); 
 
-// Fungsi untuk mendaftarkan pengguna baru
 exports.registerUser = async (req, res) => {
   try {
     const { username, password, email, namaLengkap, usia, jenisKelamin, noTelepon, alamat } = req.body;
 
-    // Cek apakah user dengan email yang sama sudah ada
     let customer = await Customer.findOne({ email });
     if (customer) {
       return res.status(400).json({ msg: 'Email sudah terdaftar' });
     }
 
-    // Buat instance customer baru
     customer = new Customer({
       username,
       password,
@@ -25,11 +22,9 @@ exports.registerUser = async (req, res) => {
       alamat,
     });
 
-    // Enkripsi password
     const salt = await bcrypt.genSalt(10);
     customer.password = await bcrypt.hash(password, salt);
 
-    // Simpan customer ke database
     await customer.save();
 
     res.status(201).json({ msg: 'Registrasi berhasil' });
@@ -40,7 +35,6 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-// Fungsi untuk login pengguna
 exports.loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -55,7 +49,6 @@ exports.loginUser = async (req, res) => {
       return res.status(400).json({ msg: 'Username atau password salah' });
     }
 
-    // Login berhasil, buat JWT
     const payload = {
       user: {
         id: customer.id,
@@ -79,7 +72,6 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-// Fungsi untuk mendapatkan semua pengguna (GET)
 exports.getUsers = async (req, res) => {
   try {
     const customers = await Customer.find().select('-password');
@@ -90,7 +82,6 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-// Fungsi untuk menghapus pengguna berdasarkan ID (DELETE)
 exports.deleteUser = async (req, res) => {
   try {
     const customer = await Customer.findById(req.params.id);
@@ -107,7 +98,6 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
-// Fungsi untuk memperbarui pengguna berdasarkan ID (UPDATE)
 exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;

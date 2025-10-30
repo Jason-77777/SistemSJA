@@ -1,18 +1,17 @@
-  import React from 'react';
+import React from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-  import { FaTachometerAlt, FaCalendarAlt, FaUserTie, FaBoxOpen, FaCreditCard, FaSignOutAlt, FaPrint} from 'react-icons/fa'; // Menambahkan ikon
+import { FaTachometerAlt, FaCalendarAlt, FaUserTie, FaBoxOpen, FaCreditCard, FaSignOutAlt, FaPrint} from 'react-icons/fa'; // Menambahkan ikon
 import '../index.css';
 
-  // Objek 'styles' untuk menampung semua CSS kita
   const styles = {
     adminLayout: {
       display: 'flex',
-      backgroundColor: '#f8f9fa', // Warna latar belakang konten utama
+      backgroundColor: '#f8f9fa', 
     },
     sidebar: {
       width: '250px',
-      background: '#808b96ff', // Warna biru gelap untuk sidebar
-      color: '#ecf0f1', // Warna teks putih keabuan
+      background: '#808b96ff', 
+      color: '#ecf0f1', 
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
@@ -26,7 +25,7 @@ import '../index.css';
       borderBottom: '1px solid #34495e',
     },
     nav: {
-      flexGrow: 1, // Mendorong tombol logout ke bawah
+      flexGrow: 1, 
       marginTop: '20px',
     },
     navList: {
@@ -45,9 +44,8 @@ import '../index.css';
       marginBottom: '8px',
       transition: 'background-color 0.2s',
     },
-    // Style ini akan diterapkan OTOMATIS oleh NavLink saat link aktif
     navLinkActive: {
-      backgroundColor: '#3498db', // Warna biru cerah untuk link aktif
+      backgroundColor: '#3498db', 
       color: '#ffffff',
       fontWeight: '500',
     },
@@ -69,11 +67,10 @@ import '../index.css';
     mainContent: {
       flex: 1,
       padding: '24px',
-      overflowY: 'auto', // Agar bisa di-scroll jika konten panjang
+      overflowY: 'auto', 
     },
   };
 
-  // Ini adalah kerangka khusus untuk semua halaman admin
   const AdminLayout = () => {
     const navigate = useNavigate();
 
@@ -93,7 +90,6 @@ import '../index.css';
           </div>
           <nav style={styles.nav}>
             <ul style={styles.navList}>
-              {/* Menggunakan NavLink untuk styling link aktif */}
               <li><NavLink to="/admin/dashboard" style={({ isActive }) => ({ ...styles.navLink, ...(isActive && styles.navLinkActive) })}><FaTachometerAlt /> Dashboard</NavLink></li>
               <li><NavLink to="/admin/jadwal" style={({ isActive }) => ({ ...styles.navLink, ...(isActive && styles.navLinkActive) })}><FaCalendarAlt /> Kelola Jadwal</NavLink></li>
               <li><NavLink to="/admin/instruktur" style={({ isActive }) => ({ ...styles.navLink, ...(isActive && styles.navLinkActive) })}><FaUserTie /> Kelola Instruktur</NavLink></li>
@@ -106,8 +102,6 @@ import '../index.css';
             <FaSignOutAlt /> Logout
           </button>
         </div>
-
-        {/* Konten Halaman Admin */}
         <main style={styles.mainContent}>
           <Outlet />
         </main>

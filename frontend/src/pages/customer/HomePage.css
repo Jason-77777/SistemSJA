@@ -1,8 +1,5 @@
-/* File: src/pages/HomePage.css */
-
-/* --- 1. Hero Section --- */
 .hero-section {
-  height: 90vh; /* Tinggi hampir sepenuh layar */
+  height: 90vh; 
   position: relative;
   display: flex;
   align-items: center;
@@ -13,7 +10,6 @@
   background-position: center;
 }
 
-/* Lapisan gelap semi-transparan di atas gambar */
 .hero-section::before {
   content: '';
   position: absolute;
@@ -25,7 +21,7 @@
 }
 
 .hero-content {
-  position: relative; /* Agar muncul di atas lapisan gelap */
+  position: relative;
   z-index: 2;
   max-width: 700px;
   padding: 20px;
@@ -59,8 +55,6 @@
   transform: translateY(-2px);
 }
 
-
-/* --- 2. Features Section --- */
 .features-section {
   padding: 60px 24px;
   text-align: center;
@@ -96,12 +90,12 @@
   height: 200px;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%); /* Efek hitam-putih */
+  filter: grayscale(100%); 
   transition: filter 0.3s, transform 0.3s;
 }
 
 .feature-card:hover .feature-image {
-  filter: grayscale(0%); /* Warna kembali normal saat di-hover */
+  filter: grayscale(0%); 
   transform: scale(1.05);
 }
 
@@ -116,8 +110,6 @@
   line-height: 1.6;
 }
 
-
-/* --- 3. Final CTA Section --- */
 .final-cta-section {
   background-color: #e6f7ff;
   padding: 60px 24px;

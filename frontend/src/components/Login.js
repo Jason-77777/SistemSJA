@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '../api'; // DIUBAH: Menggunakan file api.js
+import api from '../api'; 
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/AuthForm.css';
 import { FaUser, FaLock } from 'react-icons/fa';
@@ -19,7 +19,6 @@ const Login = () => {
     setLoading(true);
     setError('');
     try {
-      // DIUBAH: Menggunakan 'api' bukan 'axios'
       const res = await api.post('/api/users/login', formData);
       
       localStorage.setItem('token', res.data.token);

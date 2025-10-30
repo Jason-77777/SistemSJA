@@ -1,17 +1,14 @@
-// File: /data/adminSeeder.js
-
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
-const Customer = require('../models/Customer'); // Sesuaikan path jika perlu
+const Customer = require('../models/Customer');
 
-// --- KITA BUAT SEBUAH ARRAY UNTUK MENAMPUNG SEMUA AKUN ---
 const usersToSeed = [
   {
     username: 'admin',
     email: 'sjadrivinglesson@gmail.com',
-    password: 'sja123', // Ganti dengan password yang aman
+    password: 'sja123', 
     namaLengkap: 'Nissa',
     usia: 30,
     jenisKelamin: 'Wanita',
@@ -19,11 +16,10 @@ const usersToSeed = [
     alamat: 'Kantor Pusat',
     role: 'admin',
   },
-  // --- TAMBAHKAN DATA DIREKTUR DI SINI ---
   {
     username: 'DM123',
     email: 'dartamartok88@gmail.com',
-    password: '182838', // Ganti dengan password yang aman
+    password: '182838', 
     namaLengkap: 'Darta',
     usia: 38,
     jenisKelamin: 'Pria',
@@ -32,23 +28,19 @@ const usersToSeed = [
     role: 'direktur',
   }
 ];
-// ------------------------------------------
+
 
 const importData = async () => {
   try {
-    // 1. Hubungkan ke MongoDB
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('Terkoneksi ke MongoDB untuk seeding...');
 
-    // --- LOGIKA BARU MENGGUNAKAN LOOPING ---
     for (const userData of usersToSeed) {
-      // 2. Cek apakah user (admin/direktur) sudah ada
       const userExists = await Customer.findOne({ email: userData.email });
 
       if (userExists) {
         console.log(`Akun untuk ${userData.email} sudah ada.`);
       } else {
-        // 3. Jika belum ada, buat user baru
         const salt = await bcrypt.genSalt(10);
         userData.password = await bcrypt.hash(userData.password, salt);
         
@@ -56,7 +48,6 @@ const importData = async () => {
         console.log(`✅ Akun untuk ${userData.email} berhasil dibuat!`);
       }
     }
-    // ----------------------------------------
 
     process.exit();
 

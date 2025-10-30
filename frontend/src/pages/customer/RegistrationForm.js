@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import api from '../../api'; // Menggunakan file api.js
+import api from '../../api'; 
 import './RegistrationForm.css';
 
 const RegistrationForm = () => {
@@ -16,7 +16,6 @@ const RegistrationForm = () => {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        // --- DIUBAH: Menggunakan 'api' dan path tanpa '/' di depan ---
         const response = await api.get('api/paket');
         const filtered = response.data.filter(pkg => pkg.jenisKendaraan === jenisKendaraan);
         setMasterPackages(filtered);
@@ -65,7 +64,6 @@ const RegistrationForm = () => {
     }
     setIsSubmitting(true);
     try {
-      // --- DIUBAH: Menggunakan 'api' dan path tanpa '/' di depan ---
       const checkRes = await api.post('api/jadwal/check-booking', {
         paketId: finalPackage._id, startDate: date, jam: time, jenisKendaraan: jenisKendaraan,
       });
@@ -75,8 +73,7 @@ const RegistrationForm = () => {
         setIsSubmitting(false);
         return;
       }
-      
-      // --- DIUBAH: Menggunakan 'api' dan path tanpa '/' di depan ---
+    
       const daftarRes = await api.post('api/daftar', {
         paketId: finalPackage._id, startDate: date, jam: time, jenisKendaraan: jenisKendaraan,
       });

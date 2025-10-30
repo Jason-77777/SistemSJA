@@ -1,5 +1,3 @@
-// File: /models/Instruktur.js
-
 const mongoose = require('mongoose');
 
 const instrukturSchema = new mongoose.Schema({
@@ -23,9 +21,8 @@ const instrukturSchema = new mongoose.Schema({
   nopolKendaraan: {
     type: String,
     required: [true, 'Nomor polisi kendaraan wajib diisi'],
-    unique: true, // Nopol harus unik
+    unique: true, 
   },
-  // tipeMobil ada di Activity Diagram Anda, jadi kita masukkan juga
   tipeMobil: {
     type: String,
     enum: ['Manual', 'Matic'],

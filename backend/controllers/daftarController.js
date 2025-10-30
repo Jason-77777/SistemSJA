@@ -33,11 +33,10 @@ exports.createPendaftaran = async (req, res) => {
     if (!paket) { return res.status(404).json({ message: 'Paket tidak ditemukan.' }); }
     const match = paket.durasiKursus.match(/\((\d+)\s*Hari\)/);
     const jumlahHari = parseInt(match[1], 10);
-    
-    // --- SOLUSI CEPAT: TAMBAHKAN 7 JAM UNTUK KOMPENSASI TIMEZONE ---
+
     const requiredDates = [];
     const initialDate = new Date(startDate);
-    initialDate.setHours(initialDate.getHours() + 7); // Tambahkan 7 jam
+    initialDate.setHours(initialDate.getHours() + 7); 
     
     let currentDate = new Date(Date.UTC(initialDate.getUTCFullYear(), initialDate.getUTCMonth(), initialDate.getUTCDate()));
 
@@ -48,13 +47,11 @@ exports.createPendaftaran = async (req, res) => {
       currentDate.setUTCDate(currentDate.getUTCDate() + 1);
     }
     
-    // --- CONSOLE LOG TETAP ADA UNTUK DEBUGGING ---
     console.log('-------------------------------------------');
     console.log('MEMULAI PROSES PENDAFTARAN BARU');
     console.log('Request Body Diterima:', req.body);
     console.log('Jumlah Hari Paket:', jumlahHari);
     console.log('Tanggal yang Dibutuhkan (UTC) SETELAH +7 JAM:', requiredDates);
-    // --- AKHIR DEBUGGING ---
     
     const availableInstructors = await Instruktur.find({ tipeMobil: jenisKendaraan });
     if (!availableInstructors.length) { return res.status(404).json({ message: `Tidak ada instruktur untuk mobil ${jenisKendaraan}.` }); }
@@ -107,9 +104,6 @@ exports.createPendaftaran = async (req, res) => {
     res.status(500).json({ message: 'Server Error', error: error.message });
   }
 };
-
-// ... SISA FILE SAMA SEPERTI YANG ANDA KIRIM ...
-// (getMyPendaftaran, verifyPayment, dll tidak perlu diubah)
 
 exports.verifyPayment = async (req, res) => {
   const { pendaftaranId } = req.params;
@@ -272,10 +266,6 @@ exports.getAllPendaftaranForAdmin = async (req, res) => {
   }
 };
 
-// =============================================================
-// FUNGSI unduhInvoice DI FILE backend/controllers/daftarController.js
-// =============================================================
-
 exports.unduhInvoice = async (req, res) => {
   try {
     const { pendaftaranId } = req.params;
@@ -289,8 +279,7 @@ exports.unduhInvoice = async (req, res) => {
     }
 
     const htmlContent = generateInvoiceHTML(pendaftaran);
-    
-    // Perubahan penting ada di sini, dengan penambahan 'args'
+   
     const browser = await puppeteer.launch({
       headless: 'new',
       args: [

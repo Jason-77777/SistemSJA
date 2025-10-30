@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../../api'; // --- DIUBAH: Menggunakan file api.js ---
+import api from '../../api'; 
 import { Link } from 'react-router-dom';
 import './MySchedule.css'; 
 
@@ -12,7 +12,6 @@ const MySchedule = () => {
 
   useEffect(() => {
     const fetchMySchedules = async () => {
-      // Cek token dulu sebelum fetch
       const token = localStorage.getItem('token');
       if (!token) {
         setError('Anda harus login untuk melihat halaman ini.');
@@ -21,17 +20,14 @@ const MySchedule = () => {
       }
 
       try {
-        // --- DIUBAH: Menggunakan 'api' dan tanpa header manual ---
         const response = await api.get('/api/daftar/mine');
         
         if (Array.isArray(response.data)) {
           setMySchedules(response.data);
         } else {
-          // Jika respons bukan array, anggap tidak ada jadwal
           setMySchedules([]);
         }
       } catch (err) {
-        // Menangani error jika token tidak valid atau masalah server
         if (err.response && err.response.status === 401) {
             setError('Sesi Anda tidak valid. Silakan login kembali.');
         } else {

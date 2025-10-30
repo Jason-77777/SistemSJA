@@ -1,16 +1,10 @@
-// File: server.js
-
-// --- [PERUBAHAN]: Menggunakan path absolut untuk memuat .env ---
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, './.env') });
-// -------------------------------------------------------------
-
 
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-// Impor semua file routes
 const userRoutes = require('./routes/userRoutes');
 const jadwalRoutes = require('./routes/jadwalRoutes');
 const instrukturRoutes = require('./routes/instrukturRoutes');
@@ -23,7 +17,6 @@ const sesiRoutes = require('./routes/sesiRoutes');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware
 app.use(cors({
     origin: 'https://sjadrivingcourse-890420967859.asia-southeast2.run.app',
     credentials: true,
@@ -35,12 +28,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Koneksi Database
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Terkoneksi ke MongoDB'))
   .catch(err => console.error('Gagal terhubung ke MongoDB:', err));
 
-// Hubungkan semua rute API
 app.use('/api/users', userRoutes);
 app.use('/api/jadwal', jadwalRoutes);
 app.use('/api/instruktur', instrukturRoutes);
@@ -54,7 +45,6 @@ app.get('/', (req, res) => {
   res.send('Backend running OK ✅');
 });
 
-// Menjalankan server
 app.listen(port, () => {
   console.log(`Server berjalan di http://0.0.0.0:${port}`);
 });

@@ -1,4 +1,3 @@
-// File: src/pages/admin/Dashboard.js
 import React from 'react';
 
 const Dashboard = () => {

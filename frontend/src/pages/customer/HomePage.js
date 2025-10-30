@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './HomePage.css'; // Import CSS baru
-
-// Import gambar-gambar Anda
+import './HomePage.css'; 
 import heroImage from '../../assets/hero-background.jpg';
 import carImage from '../../assets/adi.jpg';
 import officeImage from '../../assets/feature-office.jpg';
@@ -10,7 +8,6 @@ import officeImage from '../../assets/feature-office.jpg';
 const HomePage = () => {
   return (
     <div>
-      {/* --- BAGIAN 1: HERO SECTION --- */}
       <section 
         className="hero-section" 
         style={{ backgroundImage: `url(${heroImage})` }}
@@ -24,7 +21,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* --- BAGIAN 2: KEUNGGULAN LAYANAN --- */}
       <section className="features-section">
         <h2>Kenapa Memilih SJA Kursus?</h2>
         <div className="features-grid">
@@ -38,7 +34,6 @@ const HomePage = () => {
           
           <div className="feature-card">
             <div className="feature-image-container">
-              {/* Anda bisa ganti dengan foto instruktur jika ada */}
               <img src={officeImage} alt="Kantor SJA" className="feature-image" />
             </div>
             <h3>Instruktur Profesional</h3>
@@ -47,7 +42,6 @@ const HomePage = () => {
 
           <div className="feature-card">
              <div className="feature-image-container">
-               {/* Anda bisa ganti dengan gambar ketiga Anda */}
                <img src={heroImage} alt="Suasana Belajar" className="feature-image" />
             </div>
             <h3>Jadwal Fleksibel</h3>
@@ -56,7 +50,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* --- BAGIAN 3: AJAKAN TERAKHIR --- */}
       <section className="final-cta-section">
         <h2>Siap Memulai Perjalanan Anda?</h2>
         <p>Ratusan siswa telah berhasil mahir mengemudi bersama kami. Kini giliran Anda!</p>

@@ -1,27 +1,19 @@
-/* -- Kustomisasi Scrollbar -- */
-
-/* Untuk browser Chrome, Safari, Edge */
 ::-webkit-scrollbar {
-  width: 8px; /* Lebar scrollbar */
+  width: 8px; 
 }
 
-/* Bagian track (latar belakang scrollbar) */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Warna abu-abu muda */
+  background: #f1f1f1; 
 }
 
-/* Bagian handle (yang digeser) */
 ::-webkit-scrollbar-thumb {
-  background: #888; /* Warna abu-abu gelap */
+  background: #888; 
   border-radius: 4px;
 }
 
-/* Handle saat di-hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Sedikit lebih gelap */
+  background: #555;
 }
-
-/* File: src/index.css */
 
 body {
   margin: 0;
@@ -31,5 +23,3 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-/* ... sisa kode CSS Anda ... */
