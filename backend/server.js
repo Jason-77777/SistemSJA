@@ -18,7 +18,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-    origin: 'https://sjadrivingcourse-890420967859.asia-southeast2.run.app',
+    // origin: 'https://sjadrivingcourse-890420967859.asia-southeast2.run.app',
+    origin: 'https://sistemsja-890420967859.asia-southeast1.run.app',
     credentials: true,
 }));
 
