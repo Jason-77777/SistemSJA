@@ -26,7 +26,6 @@ const calculateEndDate = (startDate, durationString) => {
   return currentDate;
 };
 
-
 exports.unduhLaporan = async (req, res) => {
   try {
     const { startDate, endDate } = req.query;

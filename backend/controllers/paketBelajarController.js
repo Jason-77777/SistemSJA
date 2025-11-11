@@ -1,5 +1,4 @@
 const PaketBelajar = require('../models/PaketBelajar');
-
 exports.createPaketBelajar = async (req, res) => {
   try {
     const paket = new PaketBelajar(req.body);

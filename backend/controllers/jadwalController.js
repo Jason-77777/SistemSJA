@@ -32,7 +32,6 @@ exports.checkBookingAvailability = async (req, res) => {
     const match = paket.durasiKursus.match(/\((\d+)\s*Hari\)/);
     if (!match) { return res.status(400).json({ message: 'Format durasi paket tidak valid.' }); }
     const jumlahHari = parseInt(match[1], 10);
-
     const requiredDates = [];
     const initialDate = new Date(startDate);
     initialDate.setHours(initialDate.getHours() + 7); 
@@ -88,7 +87,6 @@ exports.generateBulkSchedules = async (req, res) => {
     console.log('Input End Date (dari Admin):', endDate);
     console.log('Tanggal Mulai Terkonversi (UTC):', currentDate.toISOString());
     console.log('Tanggal Selesai Terkonversi (UTC):', lastDate.toISOString());
-
     while (currentDate <= lastDate) {
       const dayOfWeek = currentDate.getUTCDay();
       if (!skipDays.includes(dayOfWeek)) {

@@ -20,7 +20,6 @@ const HomePage = () => {
           </Link>
         </div>
       </section>
-
       <section className="features-section">
         <h2>Kenapa Memilih SJA Kursus?</h2>
         <div className="features-grid">
@@ -49,7 +48,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
       <section className="final-cta-section">
         <h2>Siap Memulai Perjalanan Anda?</h2>
         <p>Ratusan siswa telah berhasil mahir mengemudi bersama kami. Kini giliran Anda!</p>

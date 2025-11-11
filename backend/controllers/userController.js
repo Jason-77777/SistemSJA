@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 exports.registerUser = async (req, res) => {
   try {
     const { username, password, email, namaLengkap, usia, jenisKelamin, noTelepon, alamat } = req.body;
-
     let customer = await Customer.findOne({ email });
     if (customer) {
       return res.status(400).json({ msg: 'Email sudah terdaftar' });
@@ -48,7 +47,6 @@ exports.loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ msg: 'Username atau password salah' });
     }
-
     const payload = {
       user: {
         id: customer.id,

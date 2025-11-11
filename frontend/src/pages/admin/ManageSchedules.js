@@ -118,7 +118,7 @@ const ManageSchedules = () => {
         headers: { 'x-auth-token': token }
       });
       alert('Jadwal berhasil dihapus!');
-      await fetchAllSchedules(); // Muat ulang data
+      await fetchAllSchedules(); 
     } catch (err) {
       alert(err.response?.data?.message || 'Gagal menghapus jadwal.');
     } finally {
